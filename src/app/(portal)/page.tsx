@@ -1,10 +1,15 @@
 import Link from 'next/link'
 
-export default function Portal() {
+import { DashboardLink } from '@/components/ui/DashboardLink'
+
+export default function ImprovedPortal() {
 	return (
-		<div className='bg-gradient-graphic-3 h-14'>
-			<Link href='/dashboard'>Wrong</Link>
-			<Link href='app.perfaria.com'>Right</Link>
+		<div className='bg-gradient-graphic-3 flex h-14 gap-6'>
+			<Link href='/about'>Про нас</Link>
+
+			<DashboardLink href='/'>Дашборд</DashboardLink>
+			<DashboardLink href='/test'>Тест</DashboardLink>
+			<DashboardLink href='/users/profile'>Профіль</DashboardLink>
 		</div>
 	)
 }

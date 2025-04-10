@@ -38,3 +38,23 @@ export const config = {
 		'/((?!api|_next/static|_next/image|favicon.ico).*)'
 	]
 }
+
+// const url = request.nextUrl
+// const path = url.pathname
+
+// // Пропускаємо запити до _next (включаючи WebSocket HMR)
+// if (path.includes('/_next')) {
+// 	return NextResponse.next()
+// }
+
+// // Використовуємо нашу функцію для перевірки
+// const isDashboardHost = isDashboardFromRequest(request)
+
+// // Check if someone is trying to access /dashboard directly from the main domain
+// const isAccessingDashboardPath = path.startsWith('/dashboard')
+
+// // If trying to access dashboard from main domain, redirect or block
+// if (isAccessingDashboardPath && !isDashboardHost) {
+// 	// Option 1: Return 404 Not Found
+// 	return new NextResponse('Not Found', { status: 404 })
+// }

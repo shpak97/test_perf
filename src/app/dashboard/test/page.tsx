@@ -4,7 +4,7 @@ export default function Dashboard() {
 	return (
 		<div>
 			Test
-			<Link href='/dashboard'>Link</Link>
+			<Link href='/'>Link</Link>
 		</div>
 	)
 }
