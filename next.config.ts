@@ -1,7 +1,11 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+	reactStrictMode: true,
+	poweredByHeader: false,
 
-export default nextConfig;
+	// Додаткові налаштування для продакшену
+	output: 'standalone' // Оптимізована збірка для продакшену
+}
+
+export default nextConfig

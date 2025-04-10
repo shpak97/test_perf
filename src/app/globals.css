@@ -1,26 +1,94 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme static {
+	--default-font-family: var(--font-primary);
+
+	/* Color green */
+	--color-green-50: #f1fded;
+	--color-green-100: #e4fcdc;
+	--color-green-200: #d2e7d2;
+	--color-green-300: #b2d2b2;
+	--color-green-400: #9bda86;
+	--color-green-500: #79ef50;
+	--color-green-550: #2dce37;
+	--color-green-600: #1f9d60;
+	--color-green-700: #1e6858;
+	--color-green-800: #0d383a;
+	--color-green-850: #093331;
+	--color-green-900: #072523;
+	--color-green-950: #051f1d;
+
+	/* Color Gray */
+	--color-gray-50: #f7f7f7;
+	--color-gray-100: #edf0ef;
+	--color-gray-200: #d3e6d3;
+	--color-gray-300: #afbaaf;
+	--color-gray-500: #768176;
+
+	/* Color Blue */
+	--color-blue-100: #2966ff;
+	--color-blue-500: #f0f5ff;
+
+	/* Color Red */
+	--color-red-100: #fef3ce;
+	--color-red-200: #ffbfb5;
+	--color-red-500: #f63d21;
+	--color-red-600: #de361c;
+	--color-red-700: #c02e17;
+
+	/* Color Orange */
+	--color-orange-100: #fff6ea;
+	--color-orange-200: #ffe5c0;
+	--color-orange-300: #fed08f;
+	--color-orange-400: #ffb753;
+	--color-orange-500: #f18d01;
+	--color-orange-600: #c87501;
+
+	--color-white: #fff;
+
+	--gradient: linear-gradient(180deg, #062525 0%, #1d6858 100%);
+	--gradient-1: linear-gradient(360deg, #052121 0%, #0f463b 100%);
+	--gradient-2: linear-gradient(90deg, #31cfe3 0%, #5ee93e 49.39%, #f9ed9f 100%);
+	--gradient-3: linear-gradient(
+		90deg,
+		#7ad383 0%,
+		#7cd285 25.43%,
+		#e9cc66 50.02%,
+		#f19245 75.34%,
+		#e35441 100%
+	);
+	--gradient-graphic-1: linear-gradient(
+		180deg,
+		rgba(31, 157, 96, 0.5) 0%,
+		rgba(31, 157, 96, 0) 100%
+	);
+	--gradient-graphic-2: linear-gradient(180deg, rgba(13, 56, 58, 0.5) 0%, rgba(13, 56, 58, 0) 100%);
+	--gradient-graphic-3: linear-gradient(
+		180deg,
+		rgba(45, 206, 55, 0.5) 0%,
+		rgba(45, 206, 55, 0) 100%
+	);
 }
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+	.bg-gradient {
+		background: var(--gradient);
+	}
+	.bg-gradient-1 {
+		background: var(--gradient-1);
+	}
+	.bg-gradient-2 {
+		background: var(--gradient-2);
+	}
+	.bg-gradient-3 {
+		background: var(--gradient-3);
+	}
+	.bg-gradient-graphic-1 {
+		background: var(--gradient-graphic-1);
+	}
+	.bg-gradient-graphic-2 {
+		background: var(--gradient-graphic-2);
+	}
+	.bg-gradient-graphic-3 {
+		background: var(--gradient-graphic-3);
+	}
 }
