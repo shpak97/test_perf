@@ -39,6 +39,7 @@ export const isDashboard = () => {
 		return isDashboardFromHeaders()
 	} catch (e) {
 		// Якщо headers() недоступний (наприклад, в getStaticProps)
+		console.log(e)
 		return false
 	}
 }
