@@ -17,13 +17,13 @@ const nextConfig: NextConfig = {
 			// Если Host = 'app.localhost', подгружаем /dashboard
 			{
 				source: '/:path*',
-				has: [{ type: 'host', value: `app.${BASE_URL}` }],
+				has: [{ type: 'host', value: `www.app.${BASE_URL}` }],
 				destination: '/dashboard/:path*'
 			},
 			// Если Host = 'localhost', подгружаем /portal
 			{
 				source: '/:path*',
-				has: [{ type: 'host', value: `${BASE_URL}` }],
+				has: [{ type: 'host', value: `www.${BASE_URL}` }],
 				destination: '/portal/:path*'
 			}
 		]
