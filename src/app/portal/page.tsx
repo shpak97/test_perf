@@ -1,7 +1,5 @@
 import Link from 'next/link'
 
-import { DashboardLink } from '@/components/ui/DashboardLink'
-
 import { DASHBOARD_URL } from '@/constants/constants'
 
 export default function ImprovedPortal() {
