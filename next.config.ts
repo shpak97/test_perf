@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next'
 
-const BASE_URL = process.env.NODE_ENV === 'development' ? 'perfarialocal.com' : 'perfaria.com'
+import { BASE_URL, DASHBOARD_BASE_URL } from './src/constants/constants'
 
 const nextConfig: NextConfig = {
 	reactStrictMode: true,
@@ -9,21 +9,18 @@ const nextConfig: NextConfig = {
 	// (Опционально) для сборки "standalone"
 	output: 'standalone',
 
-	// Разрешаем Dev-серверу обрабатывать запросы с этих доменов:
-	allowedDevOrigins: [`http://perfarialocal.com:3000`, `http://app.perfarialocal.com:3000`],
-
 	async rewrites() {
 		return [
-			// Если Host = 'app.localhost', подгружаем /dashboard
+			// Если Host = dashboard url, подгружаем /dashboard
 			{
 				source: '/:path*',
-				has: [{ type: 'host', value: `www.app.${BASE_URL}` }],
+				has: [{ type: 'host', value: DASHBOARD_BASE_URL }],
 				destination: '/dashboard/:path*'
 			},
-			// Если Host = 'localhost', подгружаем /portal
+			// Если Host =  base url, подгружаем /portal
 			{
 				source: '/:path*',
-				has: [{ type: 'host', value: `www.${BASE_URL}` }],
+				has: [{ type: 'host', value: BASE_URL }],
 				destination: '/portal/:path*'
 			}
 		]

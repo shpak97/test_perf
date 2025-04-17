@@ -1,13 +1,11 @@
 import Link from 'next/link'
 
-import { DASHBOARD_URL } from '@/constants/constants'
+import { DASHBOARD_FULL_URL } from '@/constants/constants'
 
-export default function ImprovedPortal() {
+export default function PagePortal() {
 	return (
 		<div className='bg-gradient-graphic-3 flex h-14 gap-6'>
-			<Link href='/about'>Про нас</Link>
-			<Link href={DASHBOARD_URL}>Dash</Link>
-			<Link href={`${DASHBOARD_URL}/test`}>Dash test</Link>
+			<Link href={DASHBOARD_FULL_URL}>Dash</Link>
 		</div>
 	)
 }
