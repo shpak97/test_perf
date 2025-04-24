@@ -5,7 +5,7 @@ import type { PropsWithChildren } from 'react'
 import { Header } from '../Header/Header'
 import { Sidebar } from '../Sidebar/Sidebar'
 
-export function DashboardLayout({ children }: PropsWithChildren<unknown>) {
+export function Layout({ children }: PropsWithChildren<unknown>) {
 	return (
 		<div className='flex h-full'>
 			<Sidebar />

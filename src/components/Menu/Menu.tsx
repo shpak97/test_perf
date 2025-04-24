@@ -1,19 +1,10 @@
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+
+import { isPathActive } from '@/utils/isPathActive'
 
 import { MenuItem } from './MenuItem'
 import type { IMenuItem } from './menuItem.types'
 
-export function useClientPathname(): string | null {
-	const pathname = usePathname()
-	const [isReady, setIsReady] = useState(false)
-
-	useEffect(() => {
-		setIsReady(true)
-	}, [])
-
-	return isReady ? pathname : null
-}
 export function Menu({ items }: { items: IMenuItem[] }) {
 	const pathname = usePathname()
 
@@ -24,8 +15,7 @@ export function Menu({ items }: { items: IMenuItem[] }) {
 				<MenuItem
 					key={menuItem.id}
 					item={menuItem}
-					// isActive={isPathActive(menuItem.href, pathname)}
-					isActive={pathname === menuItem.href}
+					isActive={isPathActive(menuItem.href, pathname)}
 				/>
 			))}
 		</ul>

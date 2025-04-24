@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { DashboardLayout } from '@/components/dashboard/layout/DashboardLayout'
+import { Layout } from '@/components/layout/Layout'
 
 import { fontPrimary, montserrat } from '../fonts'
 
@@ -22,7 +22,7 @@ export default function RootLayout({
 			className={`${montserrat.variable} ${fontPrimary.variable} antialiased`}
 		>
 			<body className='h-screen antialiased'>
-				<DashboardLayout>{children}</DashboardLayout>
+				<Layout>{children}</Layout>
 			</body>
 		</html>
 	)
