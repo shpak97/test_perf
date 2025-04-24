@@ -1,3 +1,5 @@
+'use client'
+
 import { SiteLogo } from '@/components/ui/SiteLogo'
 
 import { Menu } from '../Menu/Menu'
