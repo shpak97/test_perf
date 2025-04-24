@@ -1,5 +1,3 @@
-'use client'
-
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -17,7 +15,7 @@ export function useClientPathname(): string | null {
 	return isReady ? pathname : null
 }
 export function Menu({ items }: { items: IMenuItem[] }) {
-	const pathname = useClientPathname()
+	const pathname = usePathname()
 
 	if (!pathname) return null // або skeleton / fallback
 	return (
