@@ -6,6 +6,8 @@ export const metadata: Metadata = {
 	title: 'Dashboard',
 	...NO_INDEX_PAGE
 }
+export const revalidate = 100
+export const dynamic = 'force-static'
 
 export default function DashboardPage() {
 	return <>Content</>

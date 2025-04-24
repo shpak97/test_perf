@@ -13,14 +13,13 @@ interface Props {
 }
 export function MenuItem({ item, isActive }: Props) {
 	const hasChildren = Array.isArray(item.children) && item.children.length > 0
-	console.log(item.label, isActive ? 'bg-green-600' : 'bg-white/5')
 	return (
 		<li className='flex flex-col gap-y-2'>
 			<Link
 				href={item.href}
 				className={cn(
 					'flex items-center gap-x-2 rounded-md px-[13px] py-2.5 text-white transition hover:bg-green-600',
-					1 ? 'bg-green-600' : 'bg-white/5'
+					isActive ? 'bg-green-600' : 'bg-white/5'
 				)}
 			>
 				{item.icon && (
