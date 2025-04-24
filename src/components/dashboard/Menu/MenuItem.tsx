@@ -10,7 +10,7 @@ interface Props {
 	isActive: boolean
 }
 export function MenuItem({ item, isActive }: Props) {
-	const hasChildren = item.children && item.children.length && 0 !== item.children.length
+	const hasChildren = Array.isArray(item.children) && item.children.length > 0
 	return (
 		<li className='flex flex-col gap-y-2'>
 			<Link
@@ -29,7 +29,7 @@ export function MenuItem({ item, isActive }: Props) {
 					/>
 				)}
 				{item.label}
-				{hasChildren && (
+				{item.children && hasChildren && (
 					<Image
 						src='/images/icons/icon-arrow.svg'
 						width='20'
@@ -38,7 +38,7 @@ export function MenuItem({ item, isActive }: Props) {
 					/>
 				)}
 			</Link>
-			{hasChildren && <Menu items={item.children} />}
+			{item.children && hasChildren && <Menu items={item.children} />}
 		</li>
 	)
 }
