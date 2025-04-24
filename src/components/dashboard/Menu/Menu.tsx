@@ -1,11 +1,25 @@
+'use client'
+
 import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 import { MenuItem } from './MenuItem'
 import type { IMenuItem } from './menuItem.types'
 
-export function Menu({ items }: { items: IMenuItem[] }) {
+export function useClientPathname(): string | null {
 	const pathname = usePathname()
-	console.log(pathname)
+	const [isReady, setIsReady] = useState(false)
+
+	useEffect(() => {
+		setIsReady(true)
+	}, [])
+
+	return isReady ? pathname : null
+}
+export function Menu({ items }: { items: IMenuItem[] }) {
+	const pathname = useClientPathname()
+
+	if (!pathname) return null // або skeleton / fallback
 	return (
 		<ul className='flex flex-col gap-y-2'>
 			{items.map(menuItem => (
