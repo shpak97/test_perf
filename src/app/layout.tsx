@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
 
-import { fontPrimary, montserrat } from '../../fonts'
+import { DashboardLayout } from '@/components/dashboard/layout/DashboardLayout'
 
-import './../globals.css'
+import { fontPrimary, montserrat } from '../fonts'
+
+import './globals.css'
 
 export const metadata: Metadata = {
-	title: 'Perfaria',
+	title: 'Dashboard',
 	description: 'Perfaria description'
 }
 
@@ -19,7 +21,9 @@ export default function RootLayout({
 			lang='en'
 			className={`${montserrat.variable} ${fontPrimary.variable} antialiased`}
 		>
-			<body className={'antialiased'}>{children}</body>
+			<body className='h-screen antialiased'>
+				<DashboardLayout>{children}</DashboardLayout>
+			</body>
 		</html>
 	)
 }
