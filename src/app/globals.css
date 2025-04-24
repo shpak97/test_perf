@@ -2,6 +2,7 @@
 
 @theme static {
 	--default-font-family: var(--font-primary);
+	--font-montserrat: var(--font-montserrat);
 
 	/* Color green */
 	--color-green-50: #f1fded;
