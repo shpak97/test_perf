@@ -1,22 +1,19 @@
-'use client'
-
 import { usePathname } from 'next/navigation'
-
-import { isPathActive } from '@/utils/isPathActive'
 
 import { MenuItem } from './MenuItem'
 import type { IMenuItem } from './menuItem.types'
 
 export function Menu({ items }: { items: IMenuItem[] }) {
 	const pathname = usePathname()
-	if (!pathname) return null // або skeleton
+	console.log(pathname)
 	return (
 		<ul className='flex flex-col gap-y-2'>
 			{items.map(menuItem => (
 				<MenuItem
 					key={menuItem.id}
 					item={menuItem}
-					isActive={isPathActive(menuItem.href, pathname)}
+					// isActive={isPathActive(menuItem.href, pathname)}
+					isActive={pathname === menuItem.href}
 				/>
 			))}
 		</ul>
