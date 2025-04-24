@@ -8,7 +8,6 @@ import type { IMenuItem } from './menuItem.types'
 export function Menu({ items }: { items: IMenuItem[] }) {
 	const pathname = usePathname()
 
-	if (!pathname) return null // або skeleton / fallback
 	return (
 		<ul className='flex flex-col gap-y-2'>
 			{items.map(menuItem => (
