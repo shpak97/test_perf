@@ -13,7 +13,7 @@ interface Props {
 }
 export function MenuItem({ item, isActive }: Props) {
 	const hasChildren = Array.isArray(item.children) && item.children.length > 0
-	console.log(isActive)
+	console.log(isActive ? 'bg-green-600' : 'bg-white/5')
 	return (
 		<li className='flex flex-col gap-y-2'>
 			<Link
