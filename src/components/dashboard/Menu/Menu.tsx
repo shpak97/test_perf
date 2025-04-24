@@ -1,3 +1,5 @@
+'use client'
+
 import { usePathname } from 'next/navigation'
 
 import { isPathActive } from '@/utils/isPathActive'
