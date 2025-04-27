@@ -36,70 +36,70 @@ export const SIDEBAR_MENU: IMenuItem[] = [
 		label: 'Sites',
 		icon: '/images/icons/icon-sites.svg',
 		hasChildren: false
+	},
+	{
+		id: '5-1',
+		level: 2,
+		href: '/synthetic',
+		label: 'Synthetic',
+		hasChildren: true
 	}
-	// {
-	// 	id: '5-1',
-	// 	level: 2,
-	// 	href: '/synthetic',
-	// 	label: 'Synthetic',
-	// 	hasChildren: true
-	// }
-	// {
-	// 	id: '5-1-1',
-	// 	level: 3,
-	// 	href: '/dashboard',
-	// 	label: 'Dashboard'
-	// },
-	// {
-	// 	id: '5-1-2',
-	// 	level: 3,
-	// 	href: '/shapshot',
-	// 	label: 'Shapshot'
-	// },
-	// {
-	// 	id: '5-1-3',
-	// 	level: 3,
-	// 	href: '/budget',
-	// 	label: 'Budget'
-	// },
-	// {
-	// 	id: '5-2',
-	// 	level: 2,
-	// 	href: '/crux',
-	// 	label: 'CrUX',
-	// 	hasChildren: true
-	// },
-	// {
-	// 	id: '5-2-1',
-	// 	level: 3,
-	// 	href: '/dashboard',
-	// 	label: 'Dashboard'
-	// },
-	// {
-	// 	id: '5-2-2',
-	// 	level: 3,
-	// 	href: '/shapshot',
-	// 	label: 'Shapshot'
-	// },
-	// {
-	// 	id: '5-3',
-	// 	level: 2,
-	// 	href: '/site-settings',
-	// 	label: 'Site settings',
-	// 	hasChildren: true
-	// },
-	// {
-	// 	id: '5-3-1',
-	// 	level: 3,
-	// 	href: '/general',
-	// 	label: 'General'
-	// },
-	// {
-	// 	id: '5-3-2',
-	// 	level: 3,
-	// 	href: '/manage-pages',
-	// 	label: 'Manage pages'
-	// }
+	{
+		id: '5-1-1',
+		level: 3,
+		href: '/dashboard',
+		label: 'Dashboard'
+	},
+	{
+		id: '5-1-2',
+		level: 3,
+		href: '/shapshot',
+		label: 'Shapshot'
+	},
+	{
+		id: '5-1-3',
+		level: 3,
+		href: '/budget',
+		label: 'Budget'
+	},
+	{
+		id: '5-2',
+		level: 2,
+		href: '/crux',
+		label: 'CrUX',
+		hasChildren: true
+	},
+	{
+		id: '5-2-1',
+		level: 3,
+		href: '/dashboard',
+		label: 'Dashboard'
+	},
+	{
+		id: '5-2-2',
+		level: 3,
+		href: '/shapshot',
+		label: 'Shapshot'
+	},
+	{
+		id: '5-3',
+		level: 2,
+		href: '/site-settings',
+		label: 'Site settings',
+		hasChildren: true
+	},
+	{
+		id: '5-3-1',
+		level: 3,
+		href: '/general',
+		label: 'General'
+	},
+	{
+		id: '5-3-2',
+		level: 3,
+		href: '/manage-pages',
+		label: 'Manage pages'
+	}
 ]
 export const EXTRA_MENU: IMenuItem[] = [
 	{
