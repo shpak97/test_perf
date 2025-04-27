@@ -21,7 +21,7 @@ export function Sidebar() {
 	return (
 		<aside
 			className={cn(
-				'bg-gradient group flex h-full flex-col px-6 transition-all',
+				'bg-gradient group flex h-full shrink-0 flex-col px-6 transition-all',
 				isSidebarCollapsed ? 'collapsed w-23.75 items-center' : 'w-74.5'
 			)}
 		>
