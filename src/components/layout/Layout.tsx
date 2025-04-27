@@ -7,7 +7,7 @@ import { Sidebar } from '../Sidebar/Sidebar'
 
 export function Layout({ children }: PropsWithChildren<unknown>) {
 	return (
-		<div className='flex h-full'>
+		<div className='flex h-full overflow-hidden'>
 			<Sidebar />
 			<main className='h-full flex-1 transition-all'>
 				<Header />
