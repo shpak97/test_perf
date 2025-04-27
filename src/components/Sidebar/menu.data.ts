@@ -43,7 +43,7 @@ export const SIDEBAR_MENU: IMenuItem[] = [
 		href: '/synthetic',
 		label: 'Synthetic',
 		hasChildren: true
-	}
+	},
 	{
 		id: '5-1-1',
 		level: 3,
