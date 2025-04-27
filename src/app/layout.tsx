@@ -21,7 +21,7 @@ export default function RootLayout({
 			lang='en'
 			className={`${montserrat.variable} ${fontPrimary.variable} ${fontGilroy.variable} overflow-hidden antialiased`}
 		>
-			<body className='h-screen overflow-hidden antialiased'>
+			<body className='h-dvh overflow-hidden antialiased'>
 				<Layout>{children}</Layout>
 			</body>
 		</html>
