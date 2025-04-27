@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 import { Layout } from '@/components/layout/Layout'
 
-import { fontPrimary, montserrat } from '../fonts'
+import { fontGilroy, fontPrimary, montserrat } from '../fonts'
 
 import './globals.css'
 
@@ -19,7 +19,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang='en'
-			className={`${montserrat.variable} ${fontPrimary.variable} antialiased`}
+			className={`${montserrat.variable} ${fontPrimary.variable} ${fontGilroy.variable} antialiased`}
 		>
 			<body className='h-screen antialiased'>
 				<Layout>{children}</Layout>

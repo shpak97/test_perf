@@ -1,15 +1,17 @@
+import cn from 'clsx'
 import { usePathname } from 'next/navigation'
 
 import { isPathActive } from '@/utils/isPathActive'
 
-import { MenuItem } from './MenuItem'
-import type { IMenuItem } from './menuItem.types'
+import type { IMenuItem } from '../../types/menuItem.types'
 
-export function Menu({ items }: { items: IMenuItem[] }) {
+import { MenuItem } from './MenuItem'
+
+export function Menu({ items, className }: { items: IMenuItem[]; className?: string }) {
 	const pathname = usePathname()
 
 	return (
-		<ul className='flex flex-col gap-y-2'>
+		<ul className={cn('flex flex-col gap-y-2', className)}>
 			{items.map(menuItem => (
 				<MenuItem
 					key={menuItem.id}

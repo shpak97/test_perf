@@ -1,8 +1,10 @@
 @import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme static {
 	--default-font-family: var(--font-primary);
 	--font-montserrat: var(--font-montserrat);
+	--font-gilroy: var(--font-gilroy);
 
 	/* Color green */
 	--color-green-50: #f1fded;
@@ -69,6 +71,7 @@
 		rgba(45, 206, 55, 0.5) 0%,
 		rgba(45, 206, 55, 0) 100%
 	);
+	--default-transition-timing-function: var(--ease-in);
 }
 @layer utilities {
 	.bg-gradient {

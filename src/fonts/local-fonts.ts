@@ -23,6 +23,23 @@ export const fontPrimary = localFont({
 	adjustFontFallback: 'Arial',
 	display: 'swap'
 })
+export const fontGilroy = localFont({
+	src: [
+		{
+			path: '../../public/fonts//gilroy/Gilroy-Semibold.woff2',
+			weight: '600',
+			style: 'normal'
+		},
+		{
+			path: '../../public/fonts//gilroy/Gilroy-Black.woff',
+			weight: '900',
+			style: 'normal'
+		}
+	],
+	variable: '--font-gilroy',
+	adjustFontFallback: 'Arial',
+	display: 'swap'
+})
 
 // // Second local font
 // export const secondaryFont = localFont({

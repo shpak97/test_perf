@@ -1,25 +1,29 @@
-'use client'
-
 import cn from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { Menu } from './Menu'
-import type { IMenuItem } from './menuItem.types'
+import type { IMenuItem } from '../../types/menuItem.types'
 
 interface Props {
 	item: IMenuItem
 	isActive: boolean
 }
 export function MenuItem({ item, isActive }: Props) {
-	const hasChildren = Array.isArray(item.children) && item.children.length > 0
 	return (
-		<li className='flex flex-col gap-y-2'>
+		<li
+			className={cn({
+				'group-[.collapsed]:hidden': 1 !== item.level
+			})}
+		>
 			<Link
 				href={item.href}
 				className={cn(
-					'flex items-center gap-x-2 rounded-md px-[13px] py-2.5 text-white transition hover:bg-green-600',
-					isActive ? 'bg-green-600' : 'bg-white/5'
+					'flex items-center gap-x-2 rounded-md px-3.25 py-2.5 text-white transition-all hover:bg-green-600 active:bg-green-700',
+					isActive ? 'bg-green-600' : 'bg-white/5',
+					{
+						'pl-10.5': 2 === item.level && !item.icon,
+						'pl-17.5': 3 === item.level && !item.icon
+					}
 				)}
 			>
 				{item.icon && (
@@ -30,17 +34,19 @@ export function MenuItem({ item, isActive }: Props) {
 						alt={`${item.label} menu icon`}
 					/>
 				)}
-				{item.label}
-				{item.children && hasChildren && (
+				<span className='font-gilroy flex-1 text-base leading-5 font-semibold group-[.collapsed]:hidden'>
+					{item.label}
+				</span>
+				{item.hasChildren && (
 					<Image
 						src='/images/icons/icon-arrow.svg'
 						width='20'
 						height='20'
 						alt={`${item.label} menu icon`}
+						className='rotate-90 group-[.collapsed]:hidden'
 					/>
 				)}
 			</Link>
-			{item.children && hasChildren && <Menu items={item.children} />}
 		</li>
 	)
 }

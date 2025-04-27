@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 }
 
 export default function DashboardPage() {
-	return <>Content</>
+	return <div className='bg-green-600 dark:bg-blue-400'>asdasdasdadsa</div>
 }

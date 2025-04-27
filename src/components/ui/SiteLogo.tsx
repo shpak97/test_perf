@@ -18,7 +18,9 @@ export function SiteLogo({ href }: Props) {
 				alt='Perfaria logo'
 				priority
 			/>
-			<span className='font-montserrat text-[1.625rem] leading-none text-white'>Perfaria</span>
+			<span className='font-montserrat text-2xl leading-none text-white group-[.collapsed]:hidden'>
+				Perfaria
+			</span>
 		</Link>
 	)
 }
