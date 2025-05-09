@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react'
 
-import { Header } from '@/components/header/Header'
-import { Sidebar } from '@/components/sidebar/Sidebar'
+import { Header } from '../header/Header'
+import { Sidebar } from '../sidebar/Sidebar'
 
 export function Layout({ children }: PropsWithChildren) {
 	return (
