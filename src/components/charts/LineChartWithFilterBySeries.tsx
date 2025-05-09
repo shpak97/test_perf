@@ -1,12 +1,12 @@
 import { ChartFilters } from './ChartFilters'
 import { LineChart } from './LineChart'
-import type { fakeLimits } from '@/fakeData/limits'
+import type { IChartSeries } from '@/types/charts/lineChart.types'
 
 interface LineChartWithFilterBySeriesProps {
 	options: string[]
 	active: string
 	onChange: (value: string) => void
-	series: typeof fakeLimits.series
+	series: IChartSeries[]
 	labels: string[]
 	theme: 'light' | 'dark'
 	chartKey: string
