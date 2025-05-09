@@ -27,7 +27,7 @@ export function CardUsedRequests({ data }: CardUsedRequestsProps) {
 			</div>
 
 			<div className='flex gap-x-2.5'>
-				<span>75,003</span>
+				<span>{data.total}</span>
 				<span className='text-gray-500'>Out of 100,000</span>
 			</div>
 		</div>
