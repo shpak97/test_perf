@@ -24,7 +24,7 @@ const initialState = getLocalStorageValue<AppState>(STORAGE_KEY, {
 
 export const useAppStore = create<AppState>()(
 	persist(
-		(set, get) => ({
+		set => ({
 			theme: initialState.theme,
 			language: initialState.language,
 			setTheme: () =>
