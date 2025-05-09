@@ -1,16 +1,17 @@
-import Image from 'next/image'
+import { FiGlobe } from 'react-icons/fi'
 
 export function LanguageSwitcher() {
 	return (
-		<button className='flex cursor-pointer items-center leading-none text-white'>
-			<Image
-				src='/images/icons/icon-sites.svg'
-				width='40'
-				height='40'
-				alt='Theme Mode Icon'
-				className='p-2'
+		<button
+			type='button'
+			className='group/language-switcher flex cursor-pointer items-center leading-none'
+		>
+			<FiGlobe
+				size={40}
+				className='rounded-full p-2 transition-colors group-hover/language-switcher:bg-white/10 group-active/language-switcher:bg-green-700'
+				aria-hidden
 			/>
-			<span className='group-[.collapsed]:hidden'>ENG</span>
+			<span className='ml-2 group-[.collapsed]/sidebar:hidden'>ENG</span>
 		</button>
 	)
 }

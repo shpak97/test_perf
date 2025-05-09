@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme static {
@@ -29,8 +30,8 @@
 	--color-gray-500: #768176;
 
 	/* Color Blue */
-	--color-blue-100: #2966ff;
-	--color-blue-500: #f0f5ff;
+	--color-blue-100: #f0f5ff;
+	--color-blue-500: #2966ff;
 
 	/* Color Red */
 	--color-red-100: #fef3ce;
@@ -72,6 +73,8 @@
 		rgba(45, 206, 55, 0) 100%
 	);
 	--default-transition-timing-function: var(--ease-in);
+	--theme-shadow: 0px 4px 8px 0px rgba(13, 56, 58, 0.08);
+	--button-shadow: 0px 4px 4px 0px rgba(13, 56, 58, 0.08);
 }
 @layer utilities {
 	.bg-gradient {
@@ -94,5 +97,12 @@
 	}
 	.bg-gradient-graphic-3 {
 		background: var(--gradient-graphic-3);
+	}
+	.scroll-hidden {
+		scrollbar-width: none; /* Firefox */
+		-ms-overflow-style: none; /* IE11 */
+	}
+	.scroll-hidden::-webkit-scrollbar {
+		display: none; /* Chrome, Safari */
 	}
 }

@@ -1,28 +1,26 @@
 import cn from 'clsx'
-import Image from 'next/image'
+import { LuChevronLeft } from 'react-icons/lu'
 
 import { useSidebarStore } from '@/store/sidebar.store'
 
-export function ToggleSidebarButton({
-	isSidebarCollapsed = false
-}: {
+interface ToggleSidebarButtonProps {
 	isSidebarCollapsed: boolean
-}) {
-	const toggleSidebarCollapsed = useSidebarStore(state => state.toggleSidebarCollapsed)
+}
+
+export function ToggleSidebarButton({ isSidebarCollapsed }: ToggleSidebarButtonProps) {
+	const toggleSidebar = useSidebarStore(state => state.toggleSidebarCollapsed)
+
 	return (
 		<button
-			onClick={toggleSidebarCollapsed}
+			type='button'
+			onClick={toggleSidebar}
 			className={cn(
-				'mx-auto block cursor-pointer rounded-full bg-white/10 p-2 transition-colors hover:bg-green-600 active:bg-green-700'
+				'mx-auto block cursor-pointer rounded-full bg-white/10 p-3 transition-colors hover:bg-green-600 active:bg-green-700',
+				{ 'rotate-180': isSidebarCollapsed }
 			)}
+			aria-label='Toggle sidebar'
 		>
-			<Image
-				src='/images/icons/icon-arrow.svg'
-				width='24'
-				height='24'
-				alt='Toggle Sidebar button Icon'
-				className={cn('transition-all', { '-rotate-180': !isSidebarCollapsed })}
-			/>
+			<LuChevronLeft />
 		</button>
 	)
 }

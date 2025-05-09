@@ -3,42 +3,45 @@ import { persist } from 'zustand/middleware'
 
 import { getLocalStorageValue } from '@/utils/getLocalStorageValue'
 
-type State = {
-	theme: 'light' | 'dark'
-	language: string
-}
+type Theme = 'light' | 'dark'
+type Language = string
 
-type Action = {
+interface AppState {
+	theme: Theme
+	language: Language
 	setTheme: () => void
-	setLanguage: (language: State['language']) => void
+	setLanguage: (language: Language) => void
 }
 
-const initialThemeStore = getLocalStorageValue<State>('theme', {
+const STORAGE_KEY = 'app-store'
+
+const initialState = getLocalStorageValue<AppState>(STORAGE_KEY, {
 	theme: 'light',
-	language: 'ENG'
+	language: 'ENG',
+	setTheme: () => {},
+	setLanguage: () => {}
 })
 
-export const useAppStore = create<State & Action>()(
+export const useAppStore = create<AppState>()(
 	persist(
 		(set, get) => ({
-			theme: initialThemeStore.theme,
-			language: initialThemeStore.language,
+			theme: initialState.theme,
+			language: initialState.language,
 			setTheme: () =>
-				set(state => ({
-					...state,
-					theme: get().theme === 'dark' ? 'light' : 'dark'
+				set(({ theme }) => ({
+					theme: theme === 'dark' ? 'light' : 'dark'
 				})),
 			setLanguage: language => set(() => ({ language }))
 		}),
 		{
-			name: 'theme',
-			partialize: state => ({
-				theme: state.theme,
-				language: state.language
-			})
+			name: STORAGE_KEY,
+			partialize: ({ theme, language }) => ({ theme, language })
 		}
 	)
 )
 
+// Selectors
 export const useTheme = () => useAppStore(state => state.theme)
 export const useSetTheme = () => useAppStore(state => state.setTheme)
+export const useLanguage = () => useAppStore(state => state.language)
+export const useSetLanguage = () => useAppStore(state => state.setLanguage)

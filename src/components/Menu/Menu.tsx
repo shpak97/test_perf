@@ -3,20 +3,24 @@ import { usePathname } from 'next/navigation'
 
 import { isPathActive } from '@/utils/isPathActive'
 
-import type { IMenuItem } from '../../types/menuItem.types'
-
 import { MenuItem } from './MenuItem'
+import type { IMenuItem } from '@/types/menuItem.types'
 
-export function Menu({ items, className }: { items: IMenuItem[]; className?: string }) {
+interface MenuProps {
+	items: IMenuItem[]
+	className?: string
+}
+
+export function Menu({ items, className }: MenuProps) {
 	const pathname = usePathname()
 
 	return (
 		<ul className={cn('flex flex-col gap-y-2', className)}>
-			{items.map(menuItem => (
+			{items.map(item => (
 				<MenuItem
-					key={menuItem.id}
-					item={menuItem}
-					isActive={isPathActive(menuItem.href, pathname)}
+					key={item.id}
+					item={item}
+					isActive={isPathActive(item.href, pathname)}
 				/>
 			))}
 		</ul>

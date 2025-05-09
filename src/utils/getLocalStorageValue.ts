@@ -1,20 +1,16 @@
 import { IS_CLIENT } from '@/constants/constants'
 
 export function getLocalStorageValue<T>(key: string, fallback: T): T {
-	if (!IS_CLIENT) {
-		return fallback
-	}
+	if (!IS_CLIENT) return fallback
 
 	try {
-		const stored = localStorage.getItem(key)
+		const raw = localStorage.getItem(key)
+		if (!raw) return fallback
 
-		if (!stored) {
-			return fallback
-		}
-
-		return JSON.parse(stored) as T
-	} catch (error) {
-		console.error(`Error reading localStorage key "${key}":`, error)
+		const parsed = JSON.parse(raw) as T
+		return parsed
+	} catch (err) {
+		console.error(`[getLocalStorageValue] Failed to parse key "${key}":`, err)
 		return fallback
 	}
 }

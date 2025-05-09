@@ -1,14 +1,11 @@
 import { create } from 'zustand'
 
-type State = {
+interface SidebarState {
 	isSidebarCollapsed: boolean
-}
-
-type Action = {
 	toggleSidebarCollapsed: () => void
 }
 
-export const useSidebarStore = create<State & Action>(set => ({
+export const useSidebarStore = create<SidebarState>()((set, get) => ({
 	isSidebarCollapsed: false,
-	toggleSidebarCollapsed: () => set(state => ({ isSidebarCollapsed: !state.isSidebarCollapsed }))
+	toggleSidebarCollapsed: () => set({ isSidebarCollapsed: !get().isSidebarCollapsed })
 }))

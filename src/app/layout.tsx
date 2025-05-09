@@ -21,7 +21,7 @@ export default function RootLayout({
 			lang='en'
 			className={`${montserrat.variable} ${fontPrimary.variable} ${fontGilroy.variable} antialiased`}
 		>
-			<body className='h-dvh antialiased'>
+			<body className='h-dvh bg-gray-100 text-green-800 antialiased dark:bg-green-950 dark:text-white'>
 				<Layout>{children}</Layout>
 			</body>
 		</html>

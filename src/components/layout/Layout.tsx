@@ -1,20 +1,16 @@
-'use client'
-
 import type { PropsWithChildren } from 'react'
 
-import { Header } from '../Header/Header'
-import { Sidebar } from '../Sidebar/Sidebar'
+import { Header } from '../header/Header'
+import { Sidebar } from '../sidebar/Sidebar'
 
-export function Layout({ children }: PropsWithChildren<unknown>) {
+export function Layout({ children }: PropsWithChildren) {
 	return (
 		<div className='flex h-full overflow-hidden'>
 			<Sidebar />
-			<main className='h-full flex-1 transition-all'>
+			<div className='flex h-full flex-1 flex-col transition-all'>
 				<Header />
-				<div className='h-[calc(100%-72px)] flex-1 overflow-y-auto bg-gray-100 p-7.5'>
-					<div className='h-[1000px]'>{children}</div>
-				</div>
-			</main>
+				<main className='flex-1 overflow-y-auto p-7.5'>{children}</main>
+			</div>
 		</div>
 	)
 }

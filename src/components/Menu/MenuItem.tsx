@@ -1,49 +1,38 @@
 import cn from 'clsx'
-import Image from 'next/image'
 import Link from 'next/link'
+import { LuChevronDown } from 'react-icons/lu'
 
-import type { IMenuItem } from '../../types/menuItem.types'
+import type { IMenuItem } from '@/types/menuItem.types'
 
-interface Props {
+interface MenuItemProps {
 	item: IMenuItem
 	isActive: boolean
 }
-export function MenuItem({ item, isActive }: Props) {
+
+export function MenuItem({ item, isActive }: MenuItemProps) {
+	const { href, label, Icon, level, hasChildren } = item
+
+	const paddingClass =
+		!Icon && level === 2 ? 'pl-10.5' : !Icon && level === 3 ? 'pl-17.5' : undefined
+
 	return (
-		<li
-			className={cn({
-				'group-[.collapsed]:hidden': 1 !== item.level
-			})}
-		>
+		<li className={cn({ 'group-[.collapsed]/sidebar:hidden': level !== 1 })}>
 			<Link
-				href={item.href}
+				href={href}
 				className={cn(
-					'flex items-center gap-x-2 rounded-md px-3.25 py-2.5 text-white transition-all hover:bg-green-600 active:bg-green-700',
+					'flex items-center gap-x-2 rounded-md px-3.25 py-2.5 transition-all hover:bg-green-600 active:bg-green-700',
 					isActive ? 'bg-green-600' : 'bg-white/5',
-					{
-						'pl-10.5': 2 === item.level && !item.icon,
-						'pl-17.5': 3 === item.level && !item.icon
-					}
+					paddingClass
 				)}
 			>
-				{item.icon && (
-					<Image
-						src={item.icon}
-						width='20'
-						height='20'
-						alt={`${item.label} menu icon`}
-					/>
-				)}
-				<span className='font-gilroy flex-1 text-base leading-5 font-semibold group-[.collapsed]:hidden'>
-					{item.label}
+				{Icon && <Icon size={20} />}
+				<span className='font-gilroy flex-1 text-base leading-5 font-semibold group-[.collapsed]/sidebar:hidden'>
+					{label}
 				</span>
-				{item.hasChildren && (
-					<Image
-						src='/images/icons/icon-arrow.svg'
-						width='20'
-						height='20'
-						alt={`${item.label} menu icon`}
-						className='rotate-90 group-[.collapsed]:hidden'
+				{hasChildren && (
+					<LuChevronDown
+						size={20}
+						className='p-0.5 group-[.collapsed]/sidebar:hidden'
 					/>
 				)}
 			</Link>
