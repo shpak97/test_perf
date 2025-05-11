@@ -31,6 +31,6 @@ export const dashboardData: IDashboard = {
 	},
 	usedRequests: {
 		total: 1000,
-		used: 300
+		used: 450
 	}
 }

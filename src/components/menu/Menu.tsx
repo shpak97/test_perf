@@ -1,7 +1,7 @@
 import cn from 'clsx'
 import { usePathname } from 'next/navigation'
 
-import { isPathActive } from '@/utils/isPathActive'
+import { isPathActive } from '@/utils/isPathActive.utils'
 
 import { MenuItem } from './MenuItem'
 import type { IMenuItem } from '@/types/menuItem.types'

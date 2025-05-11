@@ -32,7 +32,6 @@ export function CardUsedLimits({ data }: CardUsedLimitsProps) {
 		selectedSeries,
 		data.series
 	)
-	console.log(chartKey)
 	return (
 		<>
 			<HeaderCardWrapper>

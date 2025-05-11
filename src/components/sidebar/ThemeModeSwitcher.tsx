@@ -4,7 +4,7 @@ import { LuMoon, LuSun } from 'react-icons/lu'
 
 import { useSetTheme, useTheme } from '@/store/app.store'
 
-import { updateThemeClass } from '@/utils/updateThemeClass'
+import { updateThemeClass } from '@/utils/updateThemeClass.utils'
 
 export function ThemeModeSwitcher() {
 	const theme = useTheme()

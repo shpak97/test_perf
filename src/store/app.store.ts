@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-import { getLocalStorageValue } from '@/utils/getLocalStorageValue'
+import { getLocalStorageValue } from '@/utils/getLocalStorageValue.utils'
 
 type Theme = 'light' | 'dark'
 type Language = string
