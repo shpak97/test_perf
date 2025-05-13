@@ -1,21 +1,36 @@
 'use client'
 
-import cn from 'clsx'
+import { type HTMLAttributes, type ReactNode, forwardRef, memo } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 import { IconUnhappy } from '../icons/IconUnhappy'
 
-interface NoDataProps {
-	className?: string
-	placeholder?: string
+interface NoDataProps extends HTMLAttributes<HTMLDivElement> {
+	/** Текст‑заглушка під іконкою. */
+	placeholder?: ReactNode
+	/** Можна передати власну іконку. */
+	Icon?: typeof IconUnhappy
 }
 
-export function NoData({ className, placeholder }: NoDataProps) {
-	return (
-		<div className={cn('flex h-full w-full items-center justify-center', className)}>
-			<div className='inline-block text-center'>
-				<IconUnhappy />
-				{placeholder && <div className='mt-4 text-sm text-gray-300'>{placeholder}</div>}
+/** Центрований блок «Немає даних» (іконка + підпис). */
+export const NoData = memo(
+	forwardRef<HTMLDivElement, NoDataProps>(function NoData(
+		{ className, placeholder = 'No data', Icon = IconUnhappy, ...rest },
+		ref
+	) {
+		return (
+			<div
+				ref={ref}
+				className={twMerge('flex h-full w-full items-center justify-center', className)}
+				{...rest}
+			>
+				<div className='inline-block text-center'>
+					<Icon />
+					{placeholder && <div className='mt-4 text-sm text-gray-400'>{placeholder}</div>}
+				</div>
 			</div>
-		</div>
-	)
-}
+		)
+	})
+)
+
+NoData.displayName = 'NoData'

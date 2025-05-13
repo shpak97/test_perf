@@ -1,26 +1,44 @@
+'use client'
+
 import Image from 'next/image'
-import Link from 'next/link'
+import Link, { type LinkProps } from 'next/link'
+import { forwardRef, memo } from 'react'
+import { twMerge } from 'tailwind-merge'
 
-interface SiteLogoProps {
-	href: string
+interface SiteLogoProps extends LinkProps {
+	/** Tailwind‑класи для оболонки (посилання). */
+	className?: string
+	/** Розмір логотипу в px (квадрат). Default 42. */
+	size?: number
 }
 
-export function SiteLogo({ href }: SiteLogoProps) {
-	return (
-		<Link
-			href={href}
-			className='flex items-center gap-x-3'
-		>
-			<Image
-				src='/images/logo.svg'
-				width={42}
-				height={42}
-				alt='Perfaria logo'
-				priority
-			/>
-			<span className='font-montserrat text-2xl leading-none group-[.collapsed]/sidebar:hidden'>
-				Perfaria
-			</span>
-		</Link>
-	)
-}
+/** Клік‑логотип сайту (іконка + назва), ховається у collapsed sidebar. */
+export const SiteLogo = memo(
+	forwardRef<HTMLAnchorElement, SiteLogoProps>(function SiteLogo(
+		{ href, className, size = 42, ...rest },
+		ref
+	) {
+		return (
+			<Link
+				ref={ref}
+				href={href}
+				{...rest}
+				className={twMerge('flex items-center gap-3', className)}
+			>
+				<Image
+					src='/images/logo.svg'
+					width={size}
+					height={size}
+					priority
+					alt='Perfaria logo'
+				/>
+
+				<span className='font-montserrat text-2xl leading-none group-[.collapsed]/sidebar:hidden'>
+					Perfaria
+				</span>
+			</Link>
+		)
+	})
+)
+
+SiteLogo.displayName = 'SiteLogo'

@@ -1,39 +1,47 @@
 'use client'
 
-import { createContext, useContext, useRef } from 'react'
-import type { ReactNode } from 'react'
+import { type ReactNode, createContext, memo, useContext, useRef } from 'react'
 
 import { createPopoverStore } from '@/store/popover.store'
 
 import { useClickOutside } from '@/hooks/useClickOutside'
 
+/* ---------- CONTEXT ---------- */
 const PopoverContext = createContext<ReturnType<typeof createPopoverStore> | null>(null)
 
-export function usePopover() {
-	const context = useContext(PopoverContext)
-	if (!context) {
-		throw new Error('usePopover must be used within a <Popover> component')
-	}
-	return context
+/** Повертає zustand‑store поповера. Кидає помилку, якщо викликати поза <Popover>. */
+export const usePopover = () => {
+	const ctx = useContext(PopoverContext)
+	if (!ctx) throw new Error('usePopover must be used within <Popover>')
+	return ctx
 }
 
+/* ---------- COMPONENT ---------- */
 interface PopoverProps {
 	children: ReactNode
+	/** Додаткові Tailwind‑класи для кореневого <div>. */
+	className?: string
 }
 
-export function Popover({ children }: PopoverProps) {
+/** Обгортка‑провайдер для будь‑якого вмісту з логікою відкриття/закриття. */
+export const Popover = memo(function Popover({ children, className = 'relative' }: PopoverProps) {
+	/* store створюється один раз і зберігається в ref */
 	const storeRef = useRef(createPopoverStore())
+
+	/* закриваємо, якщо клік поза межами */
 	const { close } = storeRef.current.getState()
-	const ref = useClickOutside<HTMLDivElement>(close)
+	const containerRef = useClickOutside<HTMLDivElement>(close)
 
 	return (
 		<PopoverContext.Provider value={storeRef.current}>
 			<div
-				ref={ref}
-				className='relative'
+				ref={containerRef}
+				className={className}
 			>
 				{children}
 			</div>
 		</PopoverContext.Provider>
 	)
-}
+})
+
+Popover.displayName = 'Popover'

@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 
 import { CardProfile } from '@/components/cards/CardProfile'
-import { CardUsedLimits } from '@/components/cards/CardUsedLimits'
-import { CardUsedRequests } from '@/components/cards/CardUsedRequests'
+import { CardChartUsedLimits } from '@/components/cards/charts/CardChartUsedLimits'
+import { CardChartUsedRequests } from '@/components/cards/charts/CardChartUsedRequests'
+import { CardTableOrganisations } from '@/components/cards/tables/CardTableOrganisations'
 import { ContentCard } from '@/components/content/ContentCard'
 
 import { NO_INDEX_PAGE } from '@/constants/seo.constants'
@@ -23,11 +24,15 @@ export default function DashboardPage() {
 			</ContentCard>
 
 			<ContentCard className='col-span-3'>
-				<CardUsedLimits data={limits} />
+				<CardChartUsedLimits data={limits} />
 			</ContentCard>
 
 			<ContentCard className='col-span-4'>
-				<CardUsedRequests data={usedRequests} />
+				<CardChartUsedRequests data={usedRequests} />
+			</ContentCard>
+
+			<ContentCard className='col-span-4'>
+				<CardTableOrganisations />
 			</ContentCard>
 		</div>
 	)

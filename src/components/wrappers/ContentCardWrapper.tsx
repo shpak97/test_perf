@@ -1,13 +1,30 @@
 'use client'
 
-import cn from 'clsx'
-import { type ReactNode } from 'react'
+import { type ReactNode, forwardRef, memo } from 'react'
+import { twMerge } from 'tailwind-merge'
 
-interface ContentCardWrapperProps {
+interface ContentCardWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
 	children: ReactNode
+	/** Додаткові Tailwind‑класи. */
 	className?: string
 }
 
-export function ContentCardWrapper({ children, className }: ContentCardWrapperProps) {
-	return <div className={cn(className)}>{children}</div>
-}
+/** Оболонка‑контейнер навколо картки (дозволяє кастомний відступ, позиціонування тощо). */
+export const ContentCardWrapper = memo(
+	forwardRef<HTMLDivElement, ContentCardWrapperProps>(function ContentCardWrapper(
+		{ children, className, ...rest },
+		ref
+	) {
+		return (
+			<div
+				ref={ref}
+				className={twMerge(className)}
+				{...rest}
+			>
+				{children}
+			</div>
+		)
+	})
+)
+
+ContentCardWrapper.displayName = 'ContentCardWrapper'

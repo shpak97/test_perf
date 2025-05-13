@@ -1,15 +1,30 @@
-interface IconHappyProps {
+import { type SVGProps, memo } from 'react'
+
+interface IconHappyProps extends Omit<SVGProps<SVGSVGElement>, 'color'> {
+	/** Колір обводки. За замовчуванням — `currentColor`. */
 	color?: string
+	/** Розміри іконки (px). Якщо не вказати — 87 × 83. */
+	size?: number
 }
 
-export function IconHappy({ color = '#1F9D60' }: IconHappyProps) {
+/** SVG‑іконка «Happy monitor» (адаптована для Tailwind `currentColor`). */
+export const IconHappy = memo(function IconHappy({
+	color = 'var(--color-green-600)',
+	size = 87,
+	...rest
+}: IconHappyProps) {
+	/* співвідношення ширина/висота ≈ 87 / 83 */
+	const width = size
+	const height = Math.round((size * 83) / 87)
+
 	return (
 		<svg
-			width='87'
-			height='83'
 			viewBox='0 0 87 83'
+			width={width}
+			height={height}
 			fill='none'
 			xmlns='http://www.w3.org/2000/svg'
+			{...rest}
 		>
 			<path
 				d='M66.5 13.5H18.5C14.0817 13.5 10.5 17.0817 10.5 21.5V69.5C10.5 73.9183 14.0817 77.5 18.5 77.5H66.5C70.9183 77.5 74.5 73.9183 74.5 69.5V21.5C74.5 17.0817 70.9183 13.5 66.5 13.5Z'
@@ -64,4 +79,4 @@ export function IconHappy({ color = '#1F9D60' }: IconHappyProps) {
 			/>
 		</svg>
 	)
-}
+})

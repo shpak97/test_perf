@@ -1,23 +1,38 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { type RefObject, useEffect, useRef } from 'react'
 
-export function useClickOutside<T extends HTMLElement>(callback: () => void) {
-	const ref = useRef<T>(null)
+/**
+ * Повертає `ref`, клік/тап поза яким викликає `onOutside`.
+ *
+ * @example
+ * const ref = useClickOutside<HTMLDivElement>(() => setOpen(false))
+ * return <div ref={ref}>...</div>
+ */
+export function useClickOutside<T extends HTMLElement = HTMLElement>(
+	onOutside: () => void
+): RefObject<T | null> {
+	const targetRef = useRef<T | null>(null)
+
+	// тримаємо актуальний callback, щоб не перевішувати слухачі
+	const cbRef = useRef(onOutside)
+	cbRef.current = onOutside
 
 	useEffect(() => {
-		function handleClick(event: MouseEvent) {
-			if (ref.current && !ref.current.contains(event.target as Node)) {
-				callback()
-			}
+		const handler = (e: MouseEvent | TouchEvent) => {
+			const el = targetRef.current
+			if (!el || el.contains(e.target as Node)) return
+			cbRef.current()
 		}
 
-		document.addEventListener('mousedown', handleClick)
+		document.addEventListener('mousedown', handler, true)
+		document.addEventListener('touchstart', handler, true)
 
 		return () => {
-			document.removeEventListener('mousedown', handleClick)
+			document.removeEventListener('mousedown', handler, true)
+			document.removeEventListener('touchstart', handler, true)
 		}
-	}, [callback])
+	}, [])
 
-	return ref
+	return targetRef
 }

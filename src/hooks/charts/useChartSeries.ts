@@ -1,22 +1,25 @@
-import { useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import { filterChartSeries } from '@/utils/chart.utils'
 
 import type { IChartSeries } from '@/types/charts/lineChart.types'
 
 export function useChartSeries(initial: IChartSeries[], allLabel = 'all', showAllOption = true) {
-	const [selectedSeries, setSelectedSeries] = useState<IChartSeries[]>(initial)
+	const [selectedSeries, setSelectedSeries] = useState<IChartSeries[]>([...initial])
 
-	const selectedLabel =
-		showAllOption && selectedSeries.length === initial.length ? allLabel : selectedSeries[0].name
+	/* активна мітка */
+	const selectedLabel = useMemo(() => {
+		if (showAllOption && selectedSeries.length === initial.length) return allLabel
+		return selectedSeries[0]?.name ?? ''
+	}, [selectedSeries, initial.length, showAllOption, allLabel])
 
-	const updateSeries = (value: string) => {
-		setSelectedSeries(filterChartSeries(initial, value, allLabel))
-	}
+	/* оновлення серій */
+	const updateSeries = useCallback(
+		(value: string) => {
+			setSelectedSeries(filterChartSeries(initial, value, allLabel))
+		},
+		[initial, allLabel]
+	)
 
-	return {
-		selectedSeries,
-		selectedLabel,
-		updateSeries
-	}
+	return { selectedSeries, selectedLabel, updateSeries } as const
 }

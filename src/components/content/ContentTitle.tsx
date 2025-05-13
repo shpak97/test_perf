@@ -1,20 +1,33 @@
+'use client'
+
+import { memo } from 'react'
 import type { IconType } from 'react-icons'
 
 interface ContentTitleProps {
 	title: string
 	Icon?: IconType
+	/** Індивідуальний розмір іконки (за замовчуванням 24 px) */
+	iconSize?: number
+	/** Додаткові Tailwind‑класи */
+	className?: string
 }
 
-export function ContentTitle({ title, Icon }: ContentTitleProps) {
+/** Заголовок блока з опціональною іконкою. */
+export const ContentTitle = memo(function ContentTitle({
+	title,
+	Icon,
+	iconSize = 24,
+	className
+}: ContentTitleProps) {
 	return (
-		<div className='flex items-center gap-2.5 text-lg leading-none'>
+		<h3 className={`flex items-center gap-2.5 text-lg leading-none ${className ?? ''}`}>
 			{Icon && (
 				<Icon
-					size={24}
+					size={iconSize}
 					aria-hidden
 				/>
 			)}
 			<span>{title}</span>
-		</div>
+		</h3>
 	)
-}
+})

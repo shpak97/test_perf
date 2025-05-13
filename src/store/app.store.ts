@@ -1,37 +1,48 @@
+/* ──────────────────────────────  store/app.store.ts  ───────────────────────────── */
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 import { getLocalStorageValue } from '@/utils/getLocalStorageValue.utils'
 
+/* ─── типи ──────────────────────────────────────────────────────────────────────── */
 type Theme = 'light' | 'dark'
 type Language = string
 
-interface AppState {
+/** Те, що реально зберігаємо у localStorage. */
+interface PersistSlice {
 	theme: Theme
 	language: Language
-	setTheme: () => void
-	setLanguage: (language: Language) => void
 }
 
+/** Повний стан стора (persist + actions). */
+interface AppState extends PersistSlice {
+	setTheme: () => void
+	setLanguage: (lang: Language) => void
+}
+
+/* ─── константи ─────────────────────────────────────────────────────────────────── */
 const STORAGE_KEY = 'app-store'
 
-const initialState = getLocalStorageValue<AppState>(STORAGE_KEY, {
+/* ─── початкові дані (з localStorage або дефолти) ──────────────────────────────── */
+const persisted: PersistSlice = getLocalStorageValue<PersistSlice>(STORAGE_KEY, {
 	theme: 'light',
-	language: 'ENG',
-	setTheme: () => {},
-	setLanguage: () => {}
+	language: 'ENG'
 })
 
+/* ─── zustand‑store ────────────────────────────────────────────────────────────── */
 export const useAppStore = create<AppState>()(
 	persist(
 		set => ({
-			theme: initialState.theme,
-			language: initialState.language,
+			/* state */
+			theme: persisted.theme,
+			language: persisted.language,
+
+			/* actions */
 			setTheme: () =>
 				set(({ theme }) => ({
 					theme: theme === 'dark' ? 'light' : 'dark'
 				})),
-			setLanguage: language => set(() => ({ language }))
+			setLanguage: language => set({ language })
 		}),
 		{
 			name: STORAGE_KEY,
@@ -40,8 +51,9 @@ export const useAppStore = create<AppState>()(
 	)
 )
 
-// Selectors
-export const useTheme = () => useAppStore(state => state.theme)
-export const useSetTheme = () => useAppStore(state => state.setTheme)
-export const useLanguage = () => useAppStore(state => state.language)
-export const useSetLanguage = () => useAppStore(state => state.setLanguage)
+/* ─── selectors (завжди стабільні) ─────────────────────────────────────────────── */
+export const useTheme = () => useAppStore(s => s.theme)
+export const useSetTheme = () => useAppStore(s => s.setTheme)
+
+export const useLanguage = () => useAppStore(s => s.language)
+export const useSetLanguage = () => useAppStore(s => s.setLanguage)

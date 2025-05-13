@@ -1,8 +1,15 @@
-import { IS_CLIENT } from '@/constants/constants'
+/* ───────────── utils/updateThemeClass.utils.ts ───────────── */
 
+/**
+ * Додає або прибирає клас `dark` на `<html>`, щоб активувати Tailwind‑dark‑variants.
+ *
+ * Викликайте одразу після зміни стора `theme`.
+ *
+ * @param theme  'light' — видаляє клас, 'dark' — додає
+ */
 export function updateThemeClass(theme: 'light' | 'dark'): void {
-	if (!IS_CLIENT) return
+	if (typeof document === 'undefined') return // SSR‑safe
 
-	const root = document.documentElement
-	root.classList.toggle('dark', theme === 'dark')
+	/* ⚡ маніпулюємо лише, якщо стан реально змінюється */
+	document.documentElement.classList.toggle('dark', theme === 'dark')
 }

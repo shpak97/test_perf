@@ -1,11 +1,23 @@
+'use client'
+
+import { memo } from 'react'
+import { twMerge } from 'tailwind-merge'
+
 interface VersionProps {
 	version: string
+	className?: string
 }
 
-export function Version({ version }: VersionProps) {
+/** Невеликий текст із номером поточної версії продукту. */
+export const Version = memo(function Version({ version, className }: VersionProps) {
 	return (
-		<span className='pb-6 pl-3 text-xs opacity-60 group-[.collapsed]/sidebar:pl-0'>
-			Ver. {version}
+		<span
+			aria-label={`Application version ${version}`}
+			className={twMerge('pb-6 pl-3 text-xs opacity-60 group-[.collapsed]/sidebar:pl-0', className)}
+		>
+			Ver.&nbsp;{version}
 		</span>
 	)
-}
+})
+
+Version.displayName = 'Version'

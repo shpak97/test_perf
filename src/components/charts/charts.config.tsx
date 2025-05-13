@@ -1,17 +1,22 @@
+/* ───────── charts/lineChart.config.ts ───────── */
 import type { ApexOptions } from 'apexcharts'
 import ReactDOMServer from 'react-dom/server'
 
 import { TooltipLineChart } from './TolltipLineChart'
 
-export const LINE_CHART_COLORS: Record<string, string> = {
+/* ---------- кольори серій ---------- */
+export const LINE_CHART_COLORS = {
 	companies: '#0D383A',
 	users: '#1F9D60',
 	requests: '#79EF50',
 	teams: '#2966FF',
 	sites: '#F63D21'
-}
+} as const
 
-export const LINE_CHART_BASE_CONFIG: ApexOptions = {
+type SeriesKey = keyof typeof LINE_CHART_COLORS
+
+/* ---------- базова конфігурація (light / dark патчі додаємо окремо) ---------- */
+const BASE_CONFIG: ApexOptions = {
 	chart: {
 		fontFamily: 'var(--default-font-family)',
 		background: 'transparent',
@@ -30,7 +35,7 @@ export const LINE_CHART_BASE_CONFIG: ApexOptions = {
 		showForSingleSeries: true,
 		horizontalAlign: 'left',
 		fontSize: '14px',
-		formatter: legendName => `<div class="ml-2 leading-none">${legendName}</div>`,
+		formatter: (name: string) => `<div class="ml-2 leading-none">${name}</div>`,
 		itemMargin: { horizontal: 8, vertical: 2 },
 		markers: { size: 4, strokeWidth: 0 }
 	},
@@ -49,7 +54,7 @@ export const LINE_CHART_BASE_CONFIG: ApexOptions = {
 		crosshairs: {
 			show: true,
 			position: 'front',
-			stroke: { color: '#1F9D60', width: 1, dashArray: 0 }
+			stroke: { color: '#1F9D60', width: 1 }
 		},
 		axisBorder: { show: false },
 		labels: { style: { fontSize: '10px' } },
@@ -60,56 +65,62 @@ export const LINE_CHART_BASE_CONFIG: ApexOptions = {
 		labels: { style: { fontSize: '10px' } }
 	},
 	dataLabels: { enabled: false }
-}
+} satisfies ApexOptions
 
-export const LINE_CHART_LIGHT_CONFIG: ApexOptions = {
-	chart: { foreColor: 'var(--color-green-800)' },
+/* ---------- light / dark патчі ---------- */
+const LIGHT_PATCH: ApexOptions = {
+	chart: { foreColor: '#0D383A' }, // зел.‑800 у HEX
 	theme: { mode: 'light' },
 	grid: { borderColor: '#EDF0EF' }
 }
 
-export const LINE_CHART_DARK_CONFIG: ApexOptions = {
-	chart: { foreColor: 'var(--color-white)' },
+const DARK_PATCH: ApexOptions = {
+	chart: { foreColor: '#FFFFFF' },
 	theme: { mode: 'dark' },
 	grid: { borderColor: '#0D383A' }
 }
 
-export const LINE_CHART_GRADIENT_BASE_CONFIG: ApexOptions = {
+/* ---------- градієнт fill (area only) ---------- */
+const GRADIENT_FILL: ApexOptions = {
 	fill: {
 		type: 'gradient',
-		gradient: {
-			opacityFrom: 0.5,
-			opacityTo: 0
-		}
+		gradient: { opacityFrom: 0.5, opacityTo: 0 }
 	}
 }
 
+/* ---------- helper: мапимо назви серій у кольори ---------- */
+const mapSeriesToColors = (series: { name: string }[]): string[] =>
+	series.map(s => LINE_CHART_COLORS[s.name.toLowerCase() as SeriesKey] ?? '#79EF50')
+
+/* ---------- фабрика конфігів ---------- */
 export const createLineChartConfig = (
-	theme: 'dark' | 'light',
+	theme: 'light' | 'dark',
 	series: { name: string }[],
 	labels: string[] = [],
 	type: 'line' | 'area' = 'area'
 ): ApexOptions => {
-	const colors = series.map(s => LINE_CHART_COLORS[s.name.toLowerCase()] || '#79EF50')
-
-	const themeConfig = theme === 'dark' ? LINE_CHART_DARK_CONFIG : LINE_CHART_LIGHT_CONFIG
+	const themePatch = theme === 'dark' ? DARK_PATCH : LIGHT_PATCH
+	const colors = mapSeriesToColors(series)
 
 	return {
-		...LINE_CHART_BASE_CONFIG,
+		...BASE_CONFIG,
+		...themePatch,
+		...(type === 'area' && GRADIENT_FILL),
+
 		chart: {
-			...LINE_CHART_BASE_CONFIG.chart,
-			...themeConfig.chart,
+			...BASE_CONFIG.chart!,
+			...themePatch.chart,
 			type
 		},
 		grid: {
-			...LINE_CHART_BASE_CONFIG.grid,
-			...themeConfig.grid
+			...BASE_CONFIG.grid!,
+			...themePatch.grid
 		},
 		tooltip: {
-			...LINE_CHART_BASE_CONFIG.tooltip,
+			...BASE_CONFIG.tooltip,
 			theme
 		},
-		theme: themeConfig.theme,
+
 		colors,
 		labels
 	}

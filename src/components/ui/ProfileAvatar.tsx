@@ -1,22 +1,39 @@
-import cn from 'clsx'
-import Image from 'next/image'
+'use client'
 
-interface ProfileAvatarProps {
+import Image, { type ImageProps } from 'next/image'
+import { forwardRef, memo } from 'react'
+import { twMerge } from 'tailwind-merge'
+
+interface ProfileAvatarProps extends Omit<ImageProps, 'src' | 'width' | 'height' | 'alt'> {
+	/** Шлях до аватара або undefined — тоді підставляємо іконку за замовчуванням. */
 	src?: string
-	size: number
+	/** Квадратний розмір у px (за замовчуванням 40). */
+	size?: number
+	/** Tailwind‑класи. */
 	className?: string
 }
 
-export function ProfileAvatar({ src, size, className }: ProfileAvatarProps) {
-	const fallbackSrc = '/images/icons/icon-profile-anonimus.svg'
+const FALLBACK_SRC = '/images/icons/icon-profile-anonimus.svg'
 
-	return (
-		<Image
-			src={src || fallbackSrc}
-			width={size}
-			height={size}
-			alt='User avatar'
-			className={cn('inline-block rounded-full', className)}
-		/>
-	)
-}
+/** Круглий аватар користувача з фолбеком. */
+export const ProfileAvatar = memo(
+	forwardRef<HTMLImageElement, ProfileAvatarProps>(function ProfileAvatar(
+		{ src, size = 40, className, ...rest },
+		ref
+	) {
+		return (
+			<Image
+				ref={ref}
+				src={src || FALLBACK_SRC}
+				width={size}
+				height={size}
+				alt='User avatar'
+				className={twMerge('inline-block rounded-full object-cover', className)}
+				priority
+				{...rest}
+			/>
+		)
+	})
+)
+
+ProfileAvatar.displayName = 'ProfileAvatar'
