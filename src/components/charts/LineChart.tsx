@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic'
 import { memo, useMemo } from 'react'
 
-import { LINE_CHART_GRADIENT_BASE_CONFIG, createLineChartConfig } from './charts.config'
+import { createLineChartConfig } from './charts.config'
 import type { IChartSeries } from '@/types/charts/lineChart.types'
 
 const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
@@ -15,21 +15,24 @@ export interface LineChartProps {
 	labels?: string[]
 }
 
-/** Обгортка над ApexCharts з автоконфігом і мемоізацією */
+/** Обгортка над ApexCharts з автоматичним конфігуруванням та мемоізацією. */
 export const LineChart = memo(function LineChart({
 	type = 'area',
 	series,
 	theme,
 	labels = []
 }: LineChartProps) {
-	/* memo‑конфіг: перераховується лише при зміні залежностей */
-	const options = useMemo(() => {
-		const base = createLineChartConfig(theme, series, labels)
-		return type === 'area' ? { ...base, ...LINE_CHART_GRADIENT_BASE_CONFIG } : base
-	}, [theme, series, labels, type])
+	/** Конфігурація графіка перераховується тільки при зміні залежностей. */
+	const options = useMemo(
+		() => createLineChartConfig(theme, series, labels, type),
+		[theme, series, labels, type]
+	)
 
-	/* ключ примусово перемальовує графік, якщо theme або назви серій змінились */
-	const chartKey = useMemo(() => `${theme}-${series.map(s => s.name).join('-')}`, [theme, series])
+	/** Ключ форцує ремоунт при зміні теми, типу чи складу серій. */
+	const chartKey = useMemo(
+		() => `${theme}-${type}-${series.map(s => s.name).join('-')}`,
+		[theme, type, series]
+	)
 
 	return (
 		<ApexChart
@@ -42,3 +45,5 @@ export const LineChart = memo(function LineChart({
 		/>
 	)
 })
+
+LineChart.displayName = 'LineChart'
