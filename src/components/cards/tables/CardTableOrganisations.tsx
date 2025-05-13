@@ -5,7 +5,7 @@ import { FiEdit3, FiTrash } from 'react-icons/fi'
 
 import { LimitBadge } from '@/ui/badges/LimitBadge'
 
-interface CardTableOrganisationsProps {}
+// interface CardTableOrganisationsProps {}
 
 const theadData = [
 	{
