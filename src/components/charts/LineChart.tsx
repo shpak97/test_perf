@@ -15,13 +15,8 @@ export interface LineChartProps {
 	labels?: string[]
 }
 
-/** Обгортка над ApexCharts з автоматичним конфігуруванням та мемоізацією. */
-export const LineChart = memo(function LineChart({
-	type = 'area',
-	series,
-	theme,
-	labels = []
-}: LineChartProps) {
+/** Обгортка над ApexCharts з автоматичним конфігуруванням та мемоізацією. */
+const LineChart = memo(({ type = 'area', series, theme, labels = [] }: LineChartProps) => {
 	/** Конфігурація графіка перераховується тільки при зміні залежностей. */
 	const options = useMemo(
 		() => createLineChartConfig(theme, series, labels, type),
@@ -47,3 +42,5 @@ export const LineChart = memo(function LineChart({
 })
 
 LineChart.displayName = 'LineChart'
+
+export default LineChart

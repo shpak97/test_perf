@@ -1,7 +1,15 @@
+'use client'
+
 import cn from 'clsx'
 import Image from 'next/image'
+import Link from 'next/link'
 import { BiBuilding } from 'react-icons/bi'
-import { FiEdit3, FiTrash } from 'react-icons/fi'
+import { CgClose } from 'react-icons/cg'
+import { FiEdit3, FiSearch, FiTrash } from 'react-icons/fi'
+import { LuFilter } from 'react-icons/lu'
+
+import { ContentTitle } from '@/components/content/ContentTitle'
+import IconTableSort from '@/components/icons/IconTableSort'
 
 import { LimitBadge } from '@/ui/badges/LimitBadge'
 
@@ -50,12 +58,12 @@ const tbodyData = [
 	{
 		id: '1',
 		organization: {
-			id: '',
+			id: '1',
 			name: 'Organization name',
 			logo: ''
 		},
 		owner: {
-			id: '',
+			id: '1',
 			name: 'David Smith',
 			logo: ''
 		},
@@ -71,12 +79,12 @@ const tbodyData = [
 	{
 		id: '2',
 		organization: {
-			id: '',
+			id: '2',
 			name: 'Organization name',
 			logo: '/images/fakeImg/fakeOrganisation.svg'
 		},
 		owner: {
-			id: '',
+			id: '2',
 			name: 'David Smith',
 			logo: '/images/fakeImg/fakeUser.png'
 		},
@@ -92,12 +100,12 @@ const tbodyData = [
 	{
 		id: '3',
 		organization: {
-			id: '',
+			id: '3',
 			name: 'Organization name',
 			logo: '/images/fakeImg/fakeOrganisation.svg'
 		},
 		owner: {
-			id: '',
+			id: '3',
 			name: 'David Smith',
 			logo: '/images/fakeImg/fakeUser.png'
 		},
@@ -114,12 +122,12 @@ const tbodyData = [
 	{
 		id: '4',
 		organization: {
-			id: '',
+			id: '4',
 			name: 'Organization name',
 			logo: '/images/fakeImg/fakeOrganisation.svg'
 		},
 		owner: {
-			id: '',
+			id: '4',
 			name: 'David Smith',
 			logo: '/images/fakeImg/fakeUser.png'
 		},
@@ -135,12 +143,12 @@ const tbodyData = [
 	{
 		id: '5',
 		organization: {
-			id: '',
+			id: '5',
 			name: 'Organization name',
 			logo: '/images/fakeImg/fakeOrganisation.svg'
 		},
 		owner: {
-			id: '',
+			id: '5',
 			name: 'David Smith',
 			logo: '/images/fakeImg/fakeUser.png'
 		},
@@ -154,12 +162,12 @@ const tbodyData = [
 	{
 		id: '6',
 		organization: {
-			id: '',
+			id: '6',
 			name: 'Organization name',
 			logo: '/images/fakeImg/fakeOrganisation.svg'
 		},
 		owner: {
-			id: '',
+			id: '6',
 			name: 'David Smith',
 			logo: '/images/fakeImg/fakeUser.png'
 		},
@@ -174,12 +182,12 @@ const tbodyData = [
 	{
 		id: '7',
 		organization: {
-			id: '',
+			id: '7',
 			name: 'Organization name',
 			logo: '/images/fakeImg/fakeOrganisation.svg'
 		},
 		owner: {
-			id: '',
+			id: '7',
 			name: 'David Smith',
 			logo: '/images/fakeImg/fakeUser.png'
 		},
@@ -193,12 +201,12 @@ const tbodyData = [
 	{
 		id: '8',
 		organization: {
-			id: '',
+			id: '8',
 			name: 'Organization name',
 			logo: '/images/fakeImg/fakeOrganisation.svg'
 		},
 		owner: {
-			id: '',
+			id: '8',
 			name: 'David Smith',
 			logo: '/images/fakeImg/fakeUser.png'
 		},
@@ -212,12 +220,12 @@ const tbodyData = [
 	{
 		id: '9',
 		organization: {
-			id: '',
+			id: '9',
 			name: 'Organization name',
 			logo: '/images/fakeImg/fakeOrganisation.svg'
 		},
 		owner: {
-			id: '',
+			id: '9',
 			name: 'David Smith',
 			logo: '/images/fakeImg/fakeUser.png'
 		},
@@ -232,12 +240,12 @@ const tbodyData = [
 	{
 		id: '10',
 		organization: {
-			id: '',
+			id: '10',
 			name: 'Organization name',
 			logo: '/images/fakeImg/fakeOrganisation.svg'
 		},
 		owner: {
-			id: '',
+			id: '10',
 			name: 'David Smith',
 			logo: '/images/fakeImg/fakeUser.png'
 		},
@@ -251,12 +259,12 @@ const tbodyData = [
 	{
 		id: '11',
 		organization: {
-			id: '',
+			id: '11',
 			name: 'Organization name',
 			logo: '/images/fakeImg/fakeOrganisation.svg'
 		},
 		owner: {
-			id: '',
+			id: '11',
 			name: 'David Smith',
 			logo: '/images/fakeImg/fakeUser.png'
 		},
@@ -270,12 +278,12 @@ const tbodyData = [
 	{
 		id: '12',
 		organization: {
-			id: '',
+			id: '12',
 			name: 'Organization name',
 			logo: '/images/fakeImg/fakeOrganisation.svg'
 		},
 		owner: {
-			id: '',
+			id: '12',
 			name: 'David Smith',
 			logo: '/images/fakeImg/fakeUser.png'
 		},
@@ -290,12 +298,12 @@ const tbodyData = [
 	{
 		id: '13',
 		organization: {
-			id: '',
+			id: '13',
 			name: 'Organization name',
 			logo: '/images/fakeImg/fakeOrganisation.svg'
 		},
 		owner: {
-			id: '',
+			id: '13',
 			name: 'David Smith',
 			logo: '/images/fakeImg/fakeUser.png'
 		},
@@ -309,12 +317,12 @@ const tbodyData = [
 	{
 		id: '14',
 		organization: {
-			id: '',
+			id: '14',
 			name: 'Organization name',
 			logo: '/images/fakeImg/fakeOrganisation.svg'
 		},
 		owner: {
-			id: '',
+			id: '14',
 			name: 'David Smith',
 			logo: '/images/fakeImg/fakeUser.png'
 		},
@@ -328,12 +336,12 @@ const tbodyData = [
 	{
 		id: '15',
 		organization: {
-			id: '',
+			id: '15',
 			name: 'Organization name',
 			logo: '/images/fakeImg/fakeOrganisation.svg'
 		},
 		owner: {
-			id: '',
+			id: '15',
 			name: 'David Smith',
 			logo: '/images/fakeImg/fakeUser.png'
 		},
@@ -345,96 +353,167 @@ const tbodyData = [
 		remainingRequests: 4444
 	}
 ]
-export function CardTableOrganisations() {
-	const BODY_HEIGHT = 570 // 10 рядків × 57 px
+
+const CardTableOrganisations = () => {
+	const BODY_HEIGHT = 570 // 10 рядків × 57 px
 
 	return (
-		<div className='rounded-lg border border-gray-100'>
-			<div
-				className='max-h-[616px] overflow-x-auto overflow-y-auto'
-				style={{ maxHeight: BODY_HEIGHT + 56.5 }} /* 56.5 px — висота шапки */
-			>
-				<table className='border-colapse w-full min-w-[1522px] text-left text-base leading-none'>
-					<thead className='sticky top-0 z-10 bg-gray-50'>
-						<tr>
-							{theadData.map((col, idx) => (
-								<th
-									key={col.name}
-									className={cn(
-										'px-4 py-5',
-										idx === 0 && 'pl-5',
-										idx === theadData.length - 1 && 'pr-5'
-									)}
+		<>
+			<div>
+				<ContentTitle
+					title='Organisations'
+					Icon={BiBuilding}
+				/>
+				<form action='search'>
+					<div className='relative'>
+						{/* іконка лупи */}
+						<FiSearch
+							size={20}
+							className='absolute top-1/2 left-4 -translate-y-1/2'
+						/>
+
+						{/* поле пошуку — робимо його peer */}
+						<input
+							type='text'
+							placeholder='Search'
+							className='peer block w-full rounded-lg border border-gray-100 py-3.25 pr-6.25 pl-11.25 text-base leading-5 transition-colors outline-none placeholder:text-green-800 placeholder:opacity-30 hover:border-gray-300 focus:border-green-600'
+						/>
+
+						{/* кнопка «очистити» — показуємо лише коли peer НЕ у стані :placeholder-shown */}
+						<button
+							type='reset'
+							className='invisible absolute top-1/2 right-4 -translate-y-1/2 rounded-full bg-blue-100 p-1 opacity-0 transition-opacity peer-[:not(:placeholder-shown)]:visible peer-[:not(:placeholder-shown)]:opacity-100'
+						>
+							<CgClose size={12} />
+						</button>
+					</div>
+				</form>
+				<button>
+					<ContentTitle
+						title='Filter'
+						Icon={LuFilter}
+					/>
+				</button>
+			</div>
+			<div className='overflow-hidden rounded-lg border border-gray-100 dark:border-green-800'>
+				<div
+					className='max-h-[616px] overflow-x-auto overflow-y-auto'
+					style={{ maxHeight: BODY_HEIGHT + 56.5 }} /* 56.5 px — висота шапки */
+				>
+					<table className='border-colapse w-full min-w-[1522px] text-left text-base leading-none'>
+						<thead className='sticky top-0 z-10 bg-gray-50 dark:bg-green-800'>
+							<tr>
+								{theadData.map((col, idx) => (
+									<th
+										key={col.name}
+										className={cn(
+											'px-4 py-5',
+											idx === 0 && 'pl-5',
+											idx === theadData.length - 1 && 'pr-5'
+										)}
+									>
+										{!col.filtered ? (
+											col.name
+										) : (
+											<button className='flex w-full items-center justify-between'>
+												{col.name}
+												<span className='flex flex-col gap-1.5'>
+													<IconTableSort
+														className='rotate-180 text-gray-300 dark:text-green-700'
+														size={4}
+													/>
+													<IconTableSort
+														size={4}
+														className='text-gray-300 dark:text-green-700'
+													/>
+												</span>
+											</button>
+										)}
+									</th>
+								))}
+							</tr>
+						</thead>
+						<tbody>
+							{tbodyData.map(row => (
+								<tr
+									key={row.id}
+									className='group/table-row border-t border-gray-100 transition-colors last:border-b hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-700'
 								>
-									{col.name}
-								</th>
-							))}
-						</tr>
-					</thead>
-					<tbody>
-						{tbodyData.map(row => (
-							<tr
-								key={row.id}
-								className='border-t border-gray-100 transition-colors last:border-b hover:bg-green-50'
-							>
-								<td className='px-4 py-3 first:pl-5 last:pr-5'>
-									<span className='flex items-center gap-2.5'>
-										{row.organization.logo ? (
+									<td className='px-4 py-3 first:pl-5 last:pr-5'>
+										<Link
+											href={`/organization/${row.organization.id}`}
+											className='flex items-center gap-2.5'
+										>
+											{row.organization.logo ? (
+												<Image
+													src={row.organization.logo}
+													alt={`${row.organization.name} logo`}
+													width={32}
+													height={32}
+												/>
+											) : (
+												<BiBuilding size={32} />
+											)}
+											{row.organization.name}
+										</Link>
+									</td>
+									<td className='px-4 py-3 first:pl-5 last:pr-5'>
+										<Link
+											href={`/user/${row.owner.id}`}
+											className='flex items-center gap-2.5'
+										>
 											<Image
-												src={row.organization.logo}
-												alt={`${row.organization.name} logo`}
+												src={row.owner.logo || '/images/icons/icon-profile-anonimus.svg'}
+												className='rounded-full'
+												alt={`${row.owner.name} avatar`}
 												width={32}
 												height={32}
 											/>
-										) : (
-											<BiBuilding size={32} />
-										)}
-										{row.organization.name}
-									</span>
-								</td>
-								<td className='px-4 py-3 first:pl-5 last:pr-5'>
-									<span className='flex items-center gap-2.5'>
-										<Image
-											src={row.owner.logo || '/images/icons/icon-profile-anonimus.svg'}
-											className='rounded-full'
-											alt={`${row.owner.name} avatar`}
-											width={32}
-											height={32}
-										/>
-										{row.owner.name}
-									</span>
-								</td>
-								<td className='px-4 py-3 first:pl-5 last:pr-5'>{row.role}</td>
-								<td className='px-4 py-3 first:pl-5 last:pr-5'>{row.teamsCount}</td>
-								<td className='px-4 py-3 first:pl-5 last:pr-5'>{row.usersCount}</td>
-								<td className='px-4 py-3 first:pl-5 last:pr-5'>{row.sitesCount}</td>
-								<td className='px-4 py-3 first:pl-5 last:pr-5'>
-									<LimitBadge color='orange'>{row.usedRequest}</LimitBadge>
-								</td>
-								<td className='px-4 py-3 first:pl-5 last:pr-5'>
-									<LimitBadge>{row.remainingRequests}</LimitBadge>
-								</td>
-								<td className='px-4 py-3 first:pl-5 last:pr-5'>
-									<span className='flex gap-x-2.5'>
-										<button className='cursor-pointer'>
-											<FiEdit3 size={20} />
-										</button>
-										<button className='cursor-pointer'>
-											<FiTrash
-												size={20}
-												className='text-red-500'
-											/>
-										</button>
-									</span>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
+											{row.owner.name}
+										</Link>
+									</td>
+									<td className='px-4 py-3 first:pl-5 last:pr-5'>{row.role}</td>
+									<td className='px-4 py-3 first:pl-5 last:pr-5'>
+										<Link href={`/organization/${row.organization.id}/teams`}>
+											{row.teamsCount}
+										</Link>
+									</td>
+									<td className='px-4 py-3 first:pl-5 last:pr-5'>{row.usersCount}</td>
+									<td className='px-4 py-3 first:pl-5 last:pr-5'>
+										<Link href={`/organization/${row.organization.id}/sites`}>
+											{row.sitesCount}
+										</Link>
+									</td>
+									<td className='px-4 py-3 first:pl-5 last:pr-5'>
+										<LimitBadge color='orange'>{row.usedRequest}</LimitBadge>
+									</td>
+									<td className='px-4 py-3 first:pl-5 last:pr-5'>
+										<LimitBadge>{row.remainingRequests}</LimitBadge>
+									</td>
+									<td className='px-4 py-3 first:pl-5 last:pr-5'>
+										<span className='invisible flex gap-x-2.5 opacity-0 transition-opacity group-hover/table-row:visible group-hover/table-row:opacity-100'>
+											<button>
+												<FiEdit3 size={20} />
+											</button>
+											<button>
+												<FiTrash
+													size={20}
+													className='text-red-500'
+												/>
+											</button>
+										</span>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
 
-			{/* footer / pagination */}
-			<div className='px-5 py-3 text-sm text-gray-500'>Showing 10 of 97</div>
-		</div>
+				{/* footer / pagination */}
+				<div className='px-5 py-3 text-sm text-gray-500'>Showing 10 of 97</div>
+			</div>
+		</>
 	)
 }
+
+export default CardTableOrganisations

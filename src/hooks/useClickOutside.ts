@@ -9,9 +9,9 @@ import { type RefObject, useEffect, useRef } from 'react'
  * const ref = useClickOutside<HTMLDivElement>(() => setOpen(false))
  * return <div ref={ref}>...</div>
  */
-export function useClickOutside<T extends HTMLElement = HTMLElement>(
+export const useClickOutside = <T extends HTMLElement = HTMLElement>(
 	onOutside: () => void
-): RefObject<T | null> {
+): RefObject<T | null> => {
 	const targetRef = useRef<T | null>(null)
 
 	// тримаємо актуальний callback, щоб не перевішувати слухачі

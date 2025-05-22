@@ -2,24 +2,24 @@
 import { IS_CLIENT } from '@/constants/constants'
 
 /**
- * Безпечно читає та десеріалізує значення з `localStorage`.
+ * Безпечно читає та десеріалізує значення з `localStorage`.
  *
  * Якщо:
- *  • коду виконується на сервері → повертає `fallback`;
- *  • ключ відсутній / `null`      → `fallback`;
- *  • JSON‑парсинг завершується помилкою → `fallback` + console.error.
+ *  • коду виконується на сервері → повертає `fallback`;
+ *  • ключ відсутній / `null`      → `fallback`;
+ *  • JSON‑парсинг завершується помилкою → `fallback` + console.error.
  *
- * @param key       Ключ у LocalStorage
- * @param fallback  Значення за замовчуванням
+ * @param key       Ключ у LocalStorage
+ * @param fallback  Значення за замовчуванням
  */
-export function getLocalStorageValue<T>(key: string, fallback: T): T {
+export const getLocalStorageValue = <T>(key: string, fallback: T): T => {
 	if (!IS_CLIENT) return fallback
 
 	try {
 		const raw = localStorage.getItem(key)
 		if (!raw) return fallback
 
-		// оголошуємо unknown, щоб перевірити тип при потребі
+		// оголошуємо unknown, щоб перевірити тип при потребі
 		const parsed: unknown = JSON.parse(raw)
 
 		return parsed as T

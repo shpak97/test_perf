@@ -4,17 +4,17 @@ import type { IChartSeries } from '@/types/charts/lineChart.types'
 /**
  * Повертає масив серій згідно з вибраною міткою.
  *
- * 1. Якщо `selectedName` === `allLabel` → повертаємо увесь масив без копіювання.
- * 2. Якщо є збіг за `name` → повертаємо масив з однією серією.
- * 3. Інакше → порожній масив (даних немає).
+ * 1. Якщо `selectedName` === `allLabel` → повертаємо увесь масив без копіювання.
+ * 2. Якщо є збіг за `name` → повертаємо масив з однією серією.
+ * 3. Інакше → порожній масив (даних немає).
  *
- * ⚠️ `allSeries` не мутується.
+ * ⚠️ `allSeries` не мутується.
  */
-export function filterChartSeries(
+export const filterChartSeries = (
 	allSeries: readonly IChartSeries[],
 	selectedName: string,
 	allLabel = 'all'
-): IChartSeries[] {
+): IChartSeries[] => {
 	if (selectedName === allLabel) return allSeries as IChartSeries[]
 
 	const found = allSeries.find(({ name }) => name === selectedName)

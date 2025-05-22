@@ -11,16 +11,16 @@ interface CardChartUsedRequestsProps {
 }
 
 /** Прогрес‑бар використаних запитів. Анімація розгортання запускається одразу після маунту. */
-export function CardChartUsedRequests({ data }: CardChartUsedRequestsProps) {
+const CardChartUsedRequests = ({ data }: CardChartUsedRequestsProps) => {
 	const [animate, setAnimate] = useState(false)
 
-	/** процент (0 – 100) із захистом від ділення на 0 та переповнення */
+	/** процент (0 – 100) із захистом від ділення на 0 та переповнення */
 	const percent = useMemo(
 		() => (data.total ? Math.min((data.used / data.total) * 100, 100) : 0),
 		[data.used, data.total]
 	)
 
-	/* запускаємо анімацію на наступному тіку, щоб CSS‑transition спрацювала */
+	/* запускаємо анімацію на наступному тіку, щоб CSS‑transition спрацювала */
 	useEffect(() => {
 		const id = requestAnimationFrame(() => setAnimate(true))
 		return () => cancelAnimationFrame(id)
@@ -44,3 +44,5 @@ export function CardChartUsedRequests({ data }: CardChartUsedRequestsProps) {
 		</div>
 	)
 }
+
+export default CardChartUsedRequests

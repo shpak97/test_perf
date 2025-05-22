@@ -2,7 +2,7 @@
 import type { ApexOptions } from 'apexcharts'
 import ReactDOMServer from 'react-dom/server'
 
-import { TooltipLineChart } from './TolltipLineChart'
+import TooltipLineChart from './TolltipLineChart'
 
 /* ---------- кольори серій ---------- */
 export const LINE_CHART_COLORS = {
@@ -15,7 +15,7 @@ export const LINE_CHART_COLORS = {
 
 type SeriesKey = keyof typeof LINE_CHART_COLORS
 
-/* ---------- базова конфігурація (light / dark патчі додаємо окремо) ---------- */
+/* ---------- базова конфігурація (light / dark патчі додаємо окремо) ---------- */
 const BASE_CONFIG: ApexOptions = {
 	chart: {
 		fontFamily: 'var(--default-font-family)',

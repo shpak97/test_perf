@@ -32,7 +32,7 @@ export const PopoverButton = memo(
 				type='button'
 				onClick={handleClick}
 				className={twMerge(
-					'cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-green-600',
+					'focus:outline-none focus-visible:ring-2 focus-visible:ring-green-600',
 					className
 				)}
 			>

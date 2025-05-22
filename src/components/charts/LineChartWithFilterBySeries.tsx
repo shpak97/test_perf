@@ -3,7 +3,7 @@
 import { memo } from 'react'
 
 import { ChartFilters } from './ChartFilters'
-import { LineChart } from './LineChart'
+import LineChart from './LineChart'
 import type { IChartSeries } from '@/types/charts/lineChart.types'
 
 export interface LineChartWithFilterBySeriesProps {

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { memo, useMemo } from 'react'
 import { FiSettings } from 'react-icons/fi'
 
-import { ProfileAvatar } from '../ui/ProfileAvatar'
+import ProfileAvatar from '@/components/ui/ProfileAvatar'
 
 import type { IUser } from '@/types/user.types'
 
@@ -13,11 +13,11 @@ interface CardProfileProps {
 	user: IUser
 }
 
-/** Профіль‑картка з аватаром і швидким переходом у налаштування. */
-export const CardProfile = memo(function CardProfile({ user }: CardProfileProps) {
+/** Профіль‑картка з аватаром і швидким переходом у налаштування. */
+const CardProfile = memo(({ user }: CardProfileProps) => {
 	const { avatar, firstName, lastName, email, isHold, paymentPlan } = user
 
-	/* об'єднуємо логіку статусу в мемо, аби не обчислювати щоразу */
+	/* об'єднуємо логіку статусу в мемо, аби не обчислювати щоразу */
 	const { statusText, statusClass } = useMemo(() => {
 		return isHold
 			? { statusText: 'Holded', statusClass: 'bg-red-100 text-red-500' }
@@ -26,7 +26,7 @@ export const CardProfile = memo(function CardProfile({ user }: CardProfileProps)
 
 	return (
 		<div className='flex h-full flex-col items-center gap-y-4'>
-			{/* Основний контент */}
+			{/* Основний контент */}
 			<div className='flex flex-1 flex-col items-center justify-center gap-y-4 px-3.5'>
 				<ProfileAvatar
 					src={avatar}
@@ -54,7 +54,7 @@ export const CardProfile = memo(function CardProfile({ user }: CardProfileProps)
 				</span>
 			</div>
 
-			{/* Кнопка «Налаштування профілю» */}
+			{/* Кнопка «Налаштування профілю» */}
 			<Link
 				href='/settings'
 				className='group dark:hover:bg-green-850 flex w-full items-center justify-center gap-2.5 border-t border-gray-100 p-3.5 transition-colors hover:bg-green-50 active:bg-green-100 dark:border-green-800 dark:active:bg-green-700'
@@ -68,3 +68,7 @@ export const CardProfile = memo(function CardProfile({ user }: CardProfileProps)
 		</div>
 	)
 })
+
+CardProfile.displayName = 'CardProfile'
+
+export default CardProfile

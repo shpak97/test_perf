@@ -3,12 +3,12 @@
 import { memo, useMemo } from 'react'
 import { FiBarChart2 } from 'react-icons/fi'
 
-import { NoData } from '@/ui/NoData'
+import NoData from '@/ui/NoData'
 
 import { useTheme } from '@/store/app.store'
 
 import { useChartSeries } from '@/hooks/charts/useChartSeries'
-import { useChartSeriesMeta } from '@/hooks/charts/useChartSeriesMeta'
+import useChartSeriesMeta from '@/hooks/charts/useChartSeriesMeta'
 
 import { LineChartWithFilterBySeries } from '../../charts/LineChartWithFilterBySeries'
 import { ContentTitle } from '../../content/ContentTitle'
@@ -22,7 +22,7 @@ interface CardChartUsedLimitsProps {
 	data: ILineChart
 }
 
-/** Карточка «Used limits» з графіком та фільтром по серіях */
+/** Карточка «Used limits» з графіком та фільтром по серіях */
 export const CardChartUsedLimits = memo(function CardChartUsedLimits({
 	data
 }: CardChartUsedLimitsProps) {

@@ -29,7 +29,7 @@ export const ChartFilters = memo(function ChartFilters({
 						onClick={() => onChange(option)}
 						disabled={isActive}
 						className={cn(
-							'cursor-pointer rounded-lg px-5 py-2.5 text-sm leading-none transition-all select-none hover:bg-green-600 hover:text-white active:bg-green-700 active:text-white',
+							'rounded-lg px-5 py-2.5 text-sm leading-none transition-all select-none hover:bg-green-600 hover:text-white active:bg-green-700 active:text-white',
 							{
 								'bg-green-550 pointer-events-none text-white shadow-(--button-shadow)': isActive
 							}

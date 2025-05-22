@@ -1,6 +1,5 @@
 'use client'
 
-import cn from 'clsx'
 import Link from 'next/link'
 import { type MouseEventHandler, type ReactNode, forwardRef, memo } from 'react'
 import type { IconType } from 'react-icons'
@@ -79,7 +78,7 @@ export const PopoverItem = memo(
 				ref={ref as never}
 				type='button'
 				onClick={handleClick as never}
-				className={cn(wrapperClass, 'cursor-pointer')}
+				className={wrapperClass}
 			>
 				{content}
 			</button>

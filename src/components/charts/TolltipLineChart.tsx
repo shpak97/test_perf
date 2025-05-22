@@ -20,8 +20,8 @@ interface TooltipLineChartProps {
 	w: ApexTooltipContext
 }
 
-/** Кастомний tooltip для ApexCharts (Line / Area). */
-export function TooltipLineChart({ series, dataPointIndex, w }: TooltipLineChartProps) {
+/** Кастомний tooltip для ApexCharts (Line / Area). */
+const TooltipLineChart = ({ series, dataPointIndex, w }: TooltipLineChartProps) => {
 	const {
 		globals: { seriesNames, categoryLabels, labels },
 		config: { colors = [] }
@@ -54,3 +54,5 @@ export function TooltipLineChart({ series, dataPointIndex, w }: TooltipLineChart
 		</div>
 	)
 }
+
+export default TooltipLineChart

@@ -9,7 +9,7 @@ import { Popover, usePopover } from '@/components/popovers/Popover'
 import { PopoverButton } from '@/components/popovers/PopoverButton'
 import { PopoverContent } from '@/components/popovers/PopoverContent'
 import { PopoverItem } from '@/components/popovers/PopoverItem'
-import { ProfileAvatar } from '@/components/ui/ProfileAvatar'
+import ProfileAvatar from '@/components/ui/ProfileAvatar'
 
 import type { IUser } from '@/types/user.types'
 
@@ -17,7 +17,7 @@ interface ProfileProps {
 	user: IUser
 }
 
-/** Кнопка‑профіль з меню «Edit / Logout». */
+/** Кнопка‑профіль з меню «Edit / Logout». */
 export const Profile = memo(function Profile({ user }: ProfileProps) {
 	const { avatar, firstName, lastName, role } = user
 
