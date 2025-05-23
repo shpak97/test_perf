@@ -10,11 +10,11 @@ import { useTheme } from '@/store/app.store'
 import { useChartSeries } from '@/hooks/charts/useChartSeries'
 import useChartSeriesMeta from '@/hooks/charts/useChartSeriesMeta'
 
-import { LineChartWithFilterBySeries } from '../../charts/LineChartWithFilterBySeries'
-import { ContentTitle } from '../../content/ContentTitle'
-import { ClientOnlyWrapper } from '../../wrappers/ClientOnlyWrapper'
-import { ContentCardWrapper } from '../../wrappers/ContentCardWrapper'
-import { HeaderCardWrapper } from '../../wrappers/HeaderCardWrapper'
+import LineChartWithFilterBySeries from '../../charts/LineChartWithFilterBySeries'
+import ContentTitle from '../../content/ContentTitle'
+import ClientOnlyWrapper from '../../wrappers/ClientOnlyWrapper'
+import ContentCardWrapper from '../../wrappers/ContentCardWrapper'
+import HeaderCardWrapper from '../../wrappers/HeaderCardWrapper'
 
 import type { ILineChart } from '@/types/charts/lineChart.types'
 
@@ -23,9 +23,7 @@ interface CardChartUsedLimitsProps {
 }
 
 /** Карточка «Used limits» з графіком та фільтром по серіях */
-export const CardChartUsedLimits = memo(function CardChartUsedLimits({
-	data
-}: CardChartUsedLimitsProps) {
+const CardChartUsedLimits = memo(function CardChartUsedLimits({ data }: CardChartUsedLimitsProps) {
 	const theme = useTheme()
 	const ALL_LABEL = 'General'
 
@@ -78,3 +76,5 @@ export const CardChartUsedLimits = memo(function CardChartUsedLimits({
 		</>
 	)
 })
+
+export default CardChartUsedLimits

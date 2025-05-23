@@ -14,6 +14,8 @@ const BASE_CLASSES =
 	'overflow-hidden rounded-xl border border-gray-100 bg-white p-5 dark:border-green-800 dark:bg-green-900'
 
 /** Універсальна картка‑контейнер із корисними дефолтами. */
-export const ContentCard = memo(function ContentCard({ children, className }: ContentCardProps) {
+const ContentCard = memo(function ContentCard({ children, className }: ContentCardProps) {
 	return <section className={twMerge(BASE_CLASSES, className)}>{children}</section>
 })
+
+export default ContentCard

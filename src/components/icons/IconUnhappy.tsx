@@ -8,7 +8,7 @@ interface IconUnhappyProps extends Omit<SVGProps<SVGSVGElement>, 'color'> {
 }
 
 /** SVG‑іконка «Unhappy monitor». */
-export const IconUnhappy = memo(function IconUnhappy({
+const IconUnhappy = memo(function IconUnhappy({
 	color = 'var(--color-gray-300)',
 	size = 87,
 	...rest
@@ -80,3 +80,5 @@ export const IconUnhappy = memo(function IconUnhappy({
 		</svg>
 	)
 })
+
+export default IconUnhappy

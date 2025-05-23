@@ -10,7 +10,7 @@ interface ContentCardWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 /** Оболонка‑контейнер навколо картки (дозволяє кастомний відступ, позиціонування тощо). */
-export const ContentCardWrapper = memo(
+const ContentCardWrapper = memo(
 	forwardRef<HTMLDivElement, ContentCardWrapperProps>(function ContentCardWrapper(
 		{ children, className, ...rest },
 		ref
@@ -28,3 +28,5 @@ export const ContentCardWrapper = memo(
 )
 
 ContentCardWrapper.displayName = 'ContentCardWrapper'
+
+export default ContentCardWrapper

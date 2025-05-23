@@ -35,7 +35,7 @@ interface PopoverContentProps {
 }
 
 /** Контейнер із контентом поповера, який плавно зʼявляється / зникає. */
-export const PopoverContent = memo(function PopoverContent({
+const PopoverContent = memo(function PopoverContent({
 	children,
 	position = 'bottom-right',
 	className
@@ -47,7 +47,7 @@ export const PopoverContent = memo(function PopoverContent({
 			role='dialog'
 			aria-hidden={!isOpen}
 			className={cn(
-				'invisible absolute overflow-hidden rounded-lg bg-white opacity-0 shadow-[var(--theme-shadow)] transition-opacity duration-150 dark:bg-green-800',
+				'invisible absolute overflow-hidden rounded-lg border border-gray-100 bg-white opacity-0 shadow-[var(--theme-shadow)] transition-opacity duration-150 dark:border-green-800 dark:bg-green-800',
 				POPOVER_POSITIONS[position],
 				{ 'visible opacity-100': isOpen },
 				className
@@ -59,3 +59,5 @@ export const PopoverContent = memo(function PopoverContent({
 })
 
 PopoverContent.displayName = 'PopoverContent'
+
+export default PopoverContent

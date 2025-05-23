@@ -3,15 +3,28 @@
 import cn from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { useCallback, useEffect } from 'react'
 import { BiBuilding } from 'react-icons/bi'
-import { CgClose } from 'react-icons/cg'
-import { FiEdit3, FiSearch, FiTrash } from 'react-icons/fi'
+import { FiEdit3, FiLogOut, FiTrash } from 'react-icons/fi'
+import { HiOutlineDotsVertical } from 'react-icons/hi'
 import { LuFilter } from 'react-icons/lu'
 
-import { ContentTitle } from '@/components/content/ContentTitle'
+import ContentTitle from '@/components/content/ContentTitle'
 import IconTableSort from '@/components/icons/IconTableSort'
+import { Popover } from '@/components/popovers/Popover'
+import PopoverButton from '@/components/popovers/PopoverButton'
+import PopoverContent from '@/components/popovers/PopoverContent'
+import PopoverItem from '@/components/popovers/PopoverItem'
+import AddNewOrganisationPopupNew from '@/components/popups/AddNewOrganisationPopupNew'
+import FilterOrganisationsPopup from '@/components/popups/FilterOrganisationsPopup'
+import ButtonPluss from '@/components/ui/buttons/ButtonPluss'
+import HeaderTableCardWrapper from '@/components/wrappers/HeaderTableCardWrapper'
 
-import { LimitBadge } from '@/ui/badges/LimitBadge'
+import LimitBadge from '@/ui/badges/LimitBadge'
+import InputSearch from '@/ui/inputs/InputSearch'
+
+import { usePopup } from '@/hooks/usePopup'
 
 // interface CardTableOrganisationsProps {}
 
@@ -356,45 +369,83 @@ const tbodyData = [
 
 const CardTableOrganisations = () => {
 	const BODY_HEIGHT = 570 // 10 рядків × 57 px
+	const searchParams = useSearchParams()
+
+	// Хуки для управління попапами
+	const addOrgPopup = usePopup('add-organisation')
+	const filterPopup = usePopup('filter-organisations')
+
+	// Перевірка URL в useEffect щоб уникнути setState під час рендеру
+	useEffect(() => {
+		const hasAddNewModal = searchParams.get('modal') === 'add-new'
+		const hasFilterModal = searchParams.get('modal') === 'filter'
+
+		if (hasAddNewModal && !addOrgPopup.isOpen) {
+			const urlParams = Object.fromEntries(searchParams.entries())
+			addOrgPopup.open(urlParams)
+		}
+
+		if (hasFilterModal && !filterPopup.isOpen) {
+			const urlParams = Object.fromEntries(searchParams.entries())
+			filterPopup.open(urlParams)
+		}
+	}, [searchParams])
+
+	// Відкриття модальних вікон
+	const handleOpenAddPopup = useCallback(() => {
+		// Відкриваємо попап з search params (URL буде оновлено автоматично)
+		addOrgPopup.open({ modal: 'add-new' })
+	}, [addOrgPopup])
+
+	const handleOpenFilterPopup = useCallback(() => {
+		// Відкриваємо фільтер попап
+		filterPopup.open({ modal: 'filter' })
+	}, [filterPopup])
 
 	return (
 		<>
-			<div>
+			<HeaderTableCardWrapper>
 				<ContentTitle
 					title='Organisations'
 					Icon={BiBuilding}
 				/>
-				<form action='search'>
-					<div className='relative'>
-						{/* іконка лупи */}
-						<FiSearch
-							size={20}
-							className='absolute top-1/2 left-4 -translate-y-1/2'
+				<div className='flex flex-1 items-center gap-7.5'>
+					<form
+						action='search'
+						className='w-[540px]'
+					>
+						<InputSearch />
+					</form>
+					<button onClick={handleOpenFilterPopup}>
+						<ContentTitle
+							title='Filter'
+							Icon={LuFilter}
 						/>
+					</button>
+				</div>
+				<div className='flex items-center gap-2.5'>
+					<ButtonPluss onClick={handleOpenAddPopup}>Add new organization</ButtonPluss>
+					<Popover>
+						<PopoverButton className='flex h-10.5 items-center gap-2'>
+							<HiOutlineDotsVertical size={20} />
+						</PopoverButton>
 
-						{/* поле пошуку — робимо його peer */}
-						<input
-							type='text'
-							placeholder='Search'
-							className='peer block w-full rounded-lg border border-gray-100 py-3.25 pr-6.25 pl-11.25 text-base leading-5 transition-colors outline-none placeholder:text-green-800 placeholder:opacity-30 hover:border-gray-300 focus:border-green-600'
-						/>
+						<PopoverContent>
+							<PopoverItem
+								label='Export'
+								Icon={FiLogOut}
+								iconClassName='-rotate-90'
+								onClick={() => console.log('Export clicked')}
+							/>
+						</PopoverContent>
+					</Popover>
+				</div>
+			</HeaderTableCardWrapper>
 
-						{/* кнопка «очистити» — показуємо лише коли peer НЕ у стані :placeholder-shown */}
-						<button
-							type='reset'
-							className='invisible absolute top-1/2 right-4 -translate-y-1/2 rounded-full bg-blue-100 p-1 opacity-0 transition-opacity peer-[:not(:placeholder-shown)]:visible peer-[:not(:placeholder-shown)]:opacity-100'
-						>
-							<CgClose size={12} />
-						</button>
-					</div>
-				</form>
-				<button>
-					<ContentTitle
-						title='Filter'
-						Icon={LuFilter}
-					/>
-				</button>
-			</div>
+			{/* Попапи */}
+			<AddNewOrganisationPopupNew />
+			<FilterOrganisationsPopup />
+
 			<div className='overflow-hidden rounded-lg border border-gray-100 dark:border-green-800'>
 				<div
 					className='max-h-[616px] overflow-x-auto overflow-y-auto'

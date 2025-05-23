@@ -2,7 +2,7 @@
 
 import { memo } from 'react'
 
-import { ChartFilters } from './ChartFilters'
+import ChartFilters from './ChartFilters'
 import LineChart from './LineChart'
 import type { IChartSeries } from '@/types/charts/lineChart.types'
 
@@ -23,7 +23,7 @@ export interface LineChartWithFilterBySeriesProps {
 }
 
 /** Графік + фільтр серій над ним. */
-export const LineChartWithFilterBySeries = memo(function LineChartWithFilterBySeries({
+const LineChartWithFilterBySeries = memo(function LineChartWithFilterBySeries({
 	options,
 	active,
 	onChange,
@@ -53,3 +53,5 @@ export const LineChartWithFilterBySeries = memo(function LineChartWithFilterBySe
 		</section>
 	)
 })
+
+export default LineChartWithFilterBySeries

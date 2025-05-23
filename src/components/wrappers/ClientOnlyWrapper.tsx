@@ -3,7 +3,7 @@
 import { type HTMLAttributes, type ReactNode, forwardRef, memo, useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-import { IconHappy } from '../icons/IconHappy'
+import IconHappy from '../icons/IconHappy'
 
 interface ClientOnlyWrapperProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
 	children: ReactNode
@@ -14,7 +14,7 @@ interface ClientOnlyWrapperProps extends Omit<HTMLAttributes<HTMLDivElement>, 'c
 }
 
 /** Рендерить `children` лише після маунту на клієнті (SSR‑safe). */
-export const ClientOnlyWrapper = memo(
+const ClientOnlyWrapper = memo(
 	forwardRef<HTMLDivElement, ClientOnlyWrapperProps>(function ClientOnlyWrapper(
 		{ children, className, placeholder = 'Loading…', FallbackIcon = IconHappy, ...rest },
 		ref
@@ -44,3 +44,5 @@ export const ClientOnlyWrapper = memo(
 )
 
 ClientOnlyWrapper.displayName = 'ClientOnlyWrapper'
+
+export default ClientOnlyWrapper

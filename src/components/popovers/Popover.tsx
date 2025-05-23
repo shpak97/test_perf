@@ -1,6 +1,7 @@
 'use client'
 
 import { type ReactNode, createContext, memo, useContext, useRef } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 import { createPopoverStore } from '@/store/popover.store'
 
@@ -24,7 +25,7 @@ interface PopoverProps {
 }
 
 /** Обгортка‑провайдер для будь‑якого вмісту з логікою відкриття/закриття. */
-export const Popover = memo(function Popover({ children, className = 'relative' }: PopoverProps) {
+export const Popover = memo(function Popover({ children, className }: PopoverProps) {
 	/* store створюється один раз і зберігається в ref */
 	const storeRef = useRef(createPopoverStore())
 
@@ -36,7 +37,7 @@ export const Popover = memo(function Popover({ children, className = 'relative' 
 		<PopoverContext.Provider value={storeRef.current}>
 			<div
 				ref={containerRef}
-				className={className}
+				className={twMerge('relative z-11', className)}
 			>
 				{children}
 			</div>

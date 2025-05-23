@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 
-import { formatNumberWithCommas } from '@/utils/formatNumberWithCommas.utils'
+import formatNumberWithCommas from '@/utils/formatNumberWithCommas.utils'
 
 import type { IUsedData } from '@/types/charts/usedData.types'
 

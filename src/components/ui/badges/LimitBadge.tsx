@@ -17,7 +17,7 @@ interface LimitBadgeProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'color' 
 }
 
 /** Маленький бейдж для лімітів (“Used / Remaining”). */
-export const LimitBadge = memo(
+const LimitBadge = memo(
 	forwardRef<HTMLSpanElement, LimitBadgeProps>(function LimitBadge(
 		{ children, color = 'green', className, ...rest },
 		ref
@@ -39,3 +39,5 @@ export const LimitBadge = memo(
 )
 
 LimitBadge.displayName = 'LimitBadge'
+
+export default LimitBadge

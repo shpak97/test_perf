@@ -13,7 +13,7 @@ interface MenuItemProps {
 }
 
 /** Один пункт бічного меню (підтримує рівні 1‑3 та вкладеність). */
-export const MenuItem = memo(function MenuItem({ item, isActive }: MenuItemProps) {
+const MenuItem = memo(function MenuItem({ item, isActive }: MenuItemProps) {
 	const { href, label, Icon, level, hasChildren } = item
 
 	/* розрахунок відступу лише для пунктів без іконки */
@@ -53,3 +53,4 @@ export const MenuItem = memo(function MenuItem({ item, isActive }: MenuItemProps
 		</li>
 	)
 })
+export default MenuItem

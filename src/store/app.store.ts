@@ -2,7 +2,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-import { getLocalStorageValue } from '@/utils/getLocalStorageValue.utils'
+import getLocalStorageValue from '@/utils/getLocalStorageValue.utils'
 
 /* ─── типи ──────────────────────────────────────────────────────────────────────── */
 type Theme = 'light' | 'dark'

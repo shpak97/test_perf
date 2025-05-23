@@ -6,7 +6,7 @@ import { memo, useMemo } from 'react'
 
 import isPathActive from '@/utils/isPathActive.utils'
 
-import { MenuItem } from './MenuItem'
+import MenuItem from './MenuItem'
 import type { IMenuItem } from '@/types/menuItem.types'
 
 interface MenuProps {
@@ -17,7 +17,7 @@ interface MenuProps {
 }
 
 /** Вертикальне навігаційне меню (підтримує вкладені рівні в `MenuItem`). */
-export const Menu = memo(function Menu({ items, className }: MenuProps) {
+const Menu = memo(function Menu({ items, className }: MenuProps) {
 	const pathname = usePathname()
 
 	/* кешуємо обчислення active‑шляхів, щоб не робити це для кожного пункту окремо */
@@ -43,3 +43,5 @@ export const Menu = memo(function Menu({ items, className }: MenuProps) {
 		</nav>
 	)
 })
+
+export default Menu

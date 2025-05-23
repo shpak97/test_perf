@@ -12,7 +12,7 @@ interface LanguageSwitcherProps extends ButtonHTMLAttributes<HTMLButtonElement> 
 }
 
 /** Кнопка перемикання мови (іконка + лейбл). */
-export const LanguageSwitcher = memo(
+const LanguageSwitcher = memo(
 	forwardRef<HTMLButtonElement, LanguageSwitcherProps>(function LanguageSwitcher(
 		{ locale = 'ENG', onChange, className, onClick, ...rest },
 		ref
@@ -46,3 +46,5 @@ export const LanguageSwitcher = memo(
 )
 
 LanguageSwitcher.displayName = 'LanguageSwitcher'
+
+export default LanguageSwitcher

@@ -13,7 +13,7 @@ interface ContentTitleProps {
 }
 
 /** Заголовок блока з опціональною іконкою. */
-export const ContentTitle = memo(function ContentTitle({
+const ContentTitle = memo(function ContentTitle({
 	title,
 	Icon,
 	iconSize = 24,
@@ -31,3 +31,5 @@ export const ContentTitle = memo(function ContentTitle({
 		</h3>
 	)
 })
+
+export default ContentTitle

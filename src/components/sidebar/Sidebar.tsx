@@ -8,13 +8,13 @@ import { VERSION } from '@/constants/constants'
 
 import { useSidebarStore } from '@/store/sidebar.store'
 
-import { Menu } from '../menu/Menu'
+import Menu from '../menu/Menu'
 
-import { LanguageSwitcher } from './LanguageSwitcher'
-import { SiteLogo } from './SiteLogo'
-import { ThemeModeSwitcher } from './ThemeModeSwitcher'
-import { ToggleSidebarButton } from './ToggleSidebarButton'
-import { Version } from './Version'
+import LanguageSwitcher from './LanguageSwitcher'
+import SiteLogo from './SiteLogo'
+import ThemeModeSwitcher from './ThemeModeSwitcher'
+import ToggleSidebarButton from './ToggleSidebarButton'
+import Version from './Version'
 import { EXTRA_MENU, SIDEBAR_MENU } from './menu.data'
 
 interface SidebarProps {
@@ -22,7 +22,7 @@ interface SidebarProps {
 }
 
 /** Лівий навігаційний сайдбар з режимом «collapse». */
-export const Sidebar = memo(function Sidebar({ className }: SidebarProps) {
+const Sidebar = memo(function Sidebar({ className }: SidebarProps) {
 	const isCollapsed = useSidebarStore(s => s.isSidebarCollapsed)
 
 	const containerClass = twMerge(
@@ -73,3 +73,5 @@ export const Sidebar = memo(function Sidebar({ className }: SidebarProps) {
 })
 
 Sidebar.displayName = 'Sidebar'
+
+export default Sidebar

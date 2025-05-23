@@ -13,7 +13,7 @@ interface SiteLogoProps extends LinkProps {
 }
 
 /** Клік‑логотип сайту (іконка + назва), ховається у collapsed sidebar. */
-export const SiteLogo = memo(
+const SiteLogo = memo(
 	forwardRef<HTMLAnchorElement, SiteLogoProps>(function SiteLogo(
 		{ href, className, size = 42, ...rest },
 		ref
@@ -42,3 +42,5 @@ export const SiteLogo = memo(
 )
 
 SiteLogo.displayName = 'SiteLogo'
+
+export default SiteLogo

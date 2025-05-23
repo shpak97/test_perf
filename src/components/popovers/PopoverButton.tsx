@@ -14,7 +14,7 @@ interface PopoverButtonProps {
 }
 
 /** Кнопка‑триггер для Popover. Текст/іконки передаються children. */
-export const PopoverButton = memo(
+const PopoverButton = memo(
 	forwardRef<HTMLButtonElement, PopoverButtonProps>(function PopoverButton(
 		{ children, className, onClick },
 		ref
@@ -43,3 +43,5 @@ export const PopoverButton = memo(
 )
 
 PopoverButton.displayName = 'PopoverButton'
+
+export default PopoverButton

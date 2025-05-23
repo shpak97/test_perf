@@ -10,8 +10,8 @@ interface HeaderCardWrapperProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 /** Верхня частина картки (заголовок) — додає стандартний `pb‑5`. */
-export const HeaderCardWrapper = memo(
-	forwardRef<HTMLDivElement, HeaderCardWrapperProps>(function HeaderCardWrapper(
+const HeaderCardWrapper = memo(
+	forwardRef<HTMLDivElement, HeaderCardWrapperProps>(function (
 		{ children, className, ...rest },
 		ref
 	) {
@@ -27,4 +27,6 @@ export const HeaderCardWrapper = memo(
 	})
 )
 
-HeaderCardWrapper.displayName = 'HeaderCardWrapper'
+HeaderCardWrapper.displayName = 'HeaderTableCardWrapper'
+
+export default HeaderCardWrapper

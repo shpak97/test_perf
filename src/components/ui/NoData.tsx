@@ -3,7 +3,7 @@
 import { type HTMLAttributes, type ReactNode, forwardRef, memo } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-import { IconUnhappy } from '../icons/IconUnhappy'
+import IconUnhappy from '../icons/IconUnhappy'
 
 interface NoDataProps extends HTMLAttributes<HTMLDivElement> {
 	/** Текст‑заглушка під іконкою. */

@@ -1,3 +1,4 @@
-export const formatNumberWithCommas = (value: number): string => {
+const formatNumberWithCommas = (value: number): string => {
 	return value.toLocaleString('en-US')
 }
+export default formatNumberWithCommas

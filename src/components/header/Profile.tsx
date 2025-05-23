@@ -6,9 +6,9 @@ import { FiEdit3, FiLogOut } from 'react-icons/fi'
 import { LuChevronDown } from 'react-icons/lu'
 
 import { Popover, usePopover } from '@/components/popovers/Popover'
-import { PopoverButton } from '@/components/popovers/PopoverButton'
-import { PopoverContent } from '@/components/popovers/PopoverContent'
-import { PopoverItem } from '@/components/popovers/PopoverItem'
+import PopoverButton from '@/components/popovers/PopoverButton'
+import PopoverContent from '@/components/popovers/PopoverContent'
+import PopoverItem from '@/components/popovers/PopoverItem'
 import ProfileAvatar from '@/components/ui/ProfileAvatar'
 
 import type { IUser } from '@/types/user.types'
@@ -18,7 +18,7 @@ interface ProfileProps {
 }
 
 /** Кнопка‑профіль з меню «Edit / Logout». */
-export const Profile = memo(function Profile({ user }: ProfileProps) {
+const Profile = memo(function Profile({ user }: ProfileProps) {
 	const { avatar, firstName, lastName, role } = user
 
 	return (
@@ -55,7 +55,7 @@ export const Profile = memo(function Profile({ user }: ProfileProps) {
 	)
 })
 
-/* ---------- допоміжна іконка ---------- */
+/* ---------- допоміжна конка ---------- */
 const ChevronIcon = memo(function ChevronIcon() {
 	const isOpen = usePopover()(state => state.isOpen)
 
@@ -69,3 +69,5 @@ const ChevronIcon = memo(function ChevronIcon() {
 		/>
 	)
 })
+
+export default Profile

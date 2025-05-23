@@ -3,7 +3,7 @@
 import { memo } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-import { Profile } from './Profile'
+import Profile from './Profile'
 import { FAKE_USER } from '@/fakeData/user'
 import type { IUser } from '@/types/user.types'
 
@@ -13,7 +13,7 @@ interface HeaderProps {
 }
 
 /** Фіксований верхній бар із профілем (праворуч). */
-export const Header = memo(function Header({ user = FAKE_USER, className }: HeaderProps) {
+const Header = memo(function Header({ user = FAKE_USER, className }: HeaderProps) {
 	return (
 		<header
 			className={twMerge(
@@ -25,3 +25,4 @@ export const Header = memo(function Header({ user = FAKE_USER, className }: Head
 		</header>
 	)
 })
+export default Header

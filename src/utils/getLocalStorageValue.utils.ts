@@ -12,7 +12,7 @@ import { IS_CLIENT } from '@/constants/constants'
  * @param key       Ключ у LocalStorage
  * @param fallback  Значення за замовчуванням
  */
-export const getLocalStorageValue = <T>(key: string, fallback: T): T => {
+const getLocalStorageValue = <T>(key: string, fallback: T): T => {
 	if (!IS_CLIENT) return fallback
 
 	try {
@@ -28,3 +28,5 @@ export const getLocalStorageValue = <T>(key: string, fallback: T): T => {
 		return fallback
 	}
 }
+
+export default getLocalStorageValue

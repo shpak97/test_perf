@@ -24,10 +24,10 @@ type ButtonProps = BaseProps & {
 	onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-export type PopoverItemProps = LinkProps | ButtonProps
+type PopoverItemProps = LinkProps | ButtonProps
 
 /** Пункт меню поповера — посилання або кнопка. */
-export const PopoverItem = memo(
+const PopoverItem = memo(
 	forwardRef<HTMLButtonElement | HTMLAnchorElement, PopoverItemProps>(function PopoverItem(
 		{ label, href, onClick, Icon, iconClassName, className },
 		ref
@@ -41,7 +41,7 @@ export const PopoverItem = memo(
 
 		/* базові класи + можливі зовнішні */
 		const wrapperClass = twMerge(
-			'flex w-full items-center gap-2.5 px-3.75 py-2.5 text-left transition-colors hover:bg-green-100 dark:hover:bg-green-700',
+			'flex w-full items-center gap-2.5 px-3.5 py-2.25 text-left transition-colors hover:bg-green-100 dark:hover:bg-green-700 ',
 			className
 		)
 
@@ -87,3 +87,5 @@ export const PopoverItem = memo(
 )
 
 PopoverItem.displayName = 'PopoverItem'
+
+export default PopoverItem

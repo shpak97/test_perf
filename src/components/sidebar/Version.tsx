@@ -9,7 +9,7 @@ interface VersionProps {
 }
 
 /** Невеликий текст із номером поточної версії продукту. */
-export const Version = memo(function Version({ version, className }: VersionProps) {
+const Version = memo(function Version({ version, className }: VersionProps) {
 	return (
 		<span
 			aria-label={`Application version ${version}`}
@@ -21,3 +21,5 @@ export const Version = memo(function Version({ version, className }: VersionProp
 })
 
 Version.displayName = 'Version'
+
+export default Version

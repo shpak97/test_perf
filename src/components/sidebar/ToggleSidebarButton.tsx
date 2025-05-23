@@ -12,7 +12,7 @@ interface ToggleSidebarButtonProps {
 }
 
 /** Кнопка‑стрілка для згортання / розгортання сайдбара. */
-export const ToggleSidebarButton = memo(
+const ToggleSidebarButton = memo(
 	forwardRef<HTMLButtonElement, ToggleSidebarButtonProps>(function ToggleSidebarButton(
 		{ isSidebarCollapsed, className },
 		ref
@@ -38,3 +38,5 @@ export const ToggleSidebarButton = memo(
 )
 
 ToggleSidebarButton.displayName = 'ToggleSidebarButton'
+
+export default ToggleSidebarButton

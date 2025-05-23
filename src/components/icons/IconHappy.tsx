@@ -8,7 +8,7 @@ interface IconHappyProps extends Omit<SVGProps<SVGSVGElement>, 'color'> {
 }
 
 /** SVG‑іконка «Happy monitor» (адаптована для Tailwind `currentColor`). */
-export const IconHappy = memo(function IconHappy({
+const IconHappy = memo(function IconHappy({
 	color = 'var(--color-green-600)',
 	size = 87,
 	...rest
@@ -80,3 +80,5 @@ export const IconHappy = memo(function IconHappy({
 		</svg>
 	)
 })
+
+export default IconHappy

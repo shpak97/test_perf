@@ -6,10 +6,10 @@ import { LuMoon, LuSun } from 'react-icons/lu'
 
 import { useSetTheme, useTheme } from '@/store/app.store'
 
-import { updateThemeClass } from '@/utils/updateThemeClass.utils'
+import updateThemeClass from '@/utils/updateThemeClass.utils'
 
 /** Перемикач світла/темної теми з анімованим повзунком. */
-export const ThemeModeSwitcher = memo(function ThemeModeSwitcher() {
+const ThemeModeSwitcher = memo(function ThemeModeSwitcher() {
 	const theme = useTheme()
 	const toggleTheme = useSetTheme()
 	const isDark = theme === 'dark'
@@ -61,3 +61,5 @@ export const ThemeModeSwitcher = memo(function ThemeModeSwitcher() {
 })
 
 ThemeModeSwitcher.displayName = 'ThemeModeSwitcher'
+
+export default ThemeModeSwitcher

@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 
 import CardProfile from '@/components/cards/CardProfile'
-import { CardChartUsedLimits } from '@/components/cards/charts/CardChartUsedLimits'
+import CardChartUsedLimits from '@/components/cards/charts/CardChartUsedLimits'
 import CardChartUsedRequests from '@/components/cards/charts/CardChartUsedRequests'
 import CardTableOrganisations from '@/components/cards/tables/CardTableOrganisations'
-import { ContentCard } from '@/components/content/ContentCard'
+import ContentCard from '@/components/content/ContentCard'
 
 import { NO_INDEX_PAGE } from '@/constants/seo.constants'
 

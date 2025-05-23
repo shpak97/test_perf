@@ -11,7 +11,7 @@ interface ChartFiltersProps {
 }
 
 /** Однорівневий текстовий фільтр (radio‑buttons style). */
-export const ChartFilters = memo(function ChartFilters({
+const ChartFilters = memo(function ChartFilters({
 	options,
 	active,
 	onChange,
@@ -42,3 +42,5 @@ export const ChartFilters = memo(function ChartFilters({
 		</div>
 	)
 })
+
+export default ChartFilters
