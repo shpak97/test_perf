@@ -3,8 +3,6 @@
 import cn from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
-import { useCallback, useEffect } from 'react'
 import { BiBuilding } from 'react-icons/bi'
 import { FiEdit3, FiLogOut, FiTrash } from 'react-icons/fi'
 import { HiOutlineDotsVertical } from 'react-icons/hi'
@@ -16,15 +14,11 @@ import { Popover } from '@/components/popovers/Popover'
 import PopoverButton from '@/components/popovers/PopoverButton'
 import PopoverContent from '@/components/popovers/PopoverContent'
 import PopoverItem from '@/components/popovers/PopoverItem'
-import AddNewOrganisationPopupNew from '@/components/popups/AddNewOrganisationPopupNew'
-import FilterOrganisationsPopup from '@/components/popups/FilterOrganisationsPopup'
 import ButtonPluss from '@/components/ui/buttons/ButtonPluss'
 import HeaderTableCardWrapper from '@/components/wrappers/HeaderTableCardWrapper'
 
 import LimitBadge from '@/ui/badges/LimitBadge'
 import InputSearch from '@/ui/inputs/InputSearch'
-
-import { usePopup } from '@/hooks/usePopup'
 
 // interface CardTableOrganisationsProps {}
 
@@ -369,38 +363,6 @@ const tbodyData = [
 
 const CardTableOrganisations = () => {
 	const BODY_HEIGHT = 570 // 10 рядків × 57 px
-	const searchParams = useSearchParams()
-
-	// Хуки для управління попапами
-	const addOrgPopup = usePopup('add-organisation')
-	const filterPopup = usePopup('filter-organisations')
-
-	// Перевірка URL в useEffect щоб уникнути setState під час рендеру
-	useEffect(() => {
-		const hasAddNewModal = searchParams.get('modal') === 'add-new'
-		const hasFilterModal = searchParams.get('modal') === 'filter'
-
-		if (hasAddNewModal && !addOrgPopup.isOpen) {
-			const urlParams = Object.fromEntries(searchParams.entries())
-			addOrgPopup.open(urlParams)
-		}
-
-		if (hasFilterModal && !filterPopup.isOpen) {
-			const urlParams = Object.fromEntries(searchParams.entries())
-			filterPopup.open(urlParams)
-		}
-	}, [searchParams])
-
-	// Відкриття модальних вікон
-	const handleOpenAddPopup = useCallback(() => {
-		// Відкриваємо попап з search params (URL буде оновлено автоматично)
-		addOrgPopup.open({ modal: 'add-new' })
-	}, [addOrgPopup])
-
-	const handleOpenFilterPopup = useCallback(() => {
-		// Відкриваємо фільтер попап
-		filterPopup.open({ modal: 'filter' })
-	}, [filterPopup])
 
 	return (
 		<>
@@ -416,7 +378,7 @@ const CardTableOrganisations = () => {
 					>
 						<InputSearch />
 					</form>
-					<button onClick={handleOpenFilterPopup}>
+					<button onClick={() => {}}>
 						<ContentTitle
 							title='Filter'
 							Icon={LuFilter}
@@ -424,7 +386,7 @@ const CardTableOrganisations = () => {
 					</button>
 				</div>
 				<div className='flex items-center gap-2.5'>
-					<ButtonPluss onClick={handleOpenAddPopup}>Add new organization</ButtonPluss>
+					<ButtonPluss onClick={() => {}}>Add new organization</ButtonPluss>
 					<Popover>
 						<PopoverButton className='flex h-10.5 items-center gap-2'>
 							<HiOutlineDotsVertical size={20} />
@@ -441,10 +403,6 @@ const CardTableOrganisations = () => {
 					</Popover>
 				</div>
 			</HeaderTableCardWrapper>
-
-			{/* Попапи */}
-			<AddNewOrganisationPopupNew />
-			<FilterOrganisationsPopup />
 
 			<div className='overflow-hidden rounded-lg border border-gray-100 dark:border-green-800'>
 				<div
