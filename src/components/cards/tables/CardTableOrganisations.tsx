@@ -1,392 +1,46 @@
 'use client'
 
-import cn from 'clsx'
 import { BiBuilding } from 'react-icons/bi'
 import { FiLogOut } from 'react-icons/fi'
 import { HiOutlineDotsVertical } from 'react-icons/hi'
 import { LuFilter } from 'react-icons/lu'
 
 import ContentTitle from '@/components/content/ContentTitle'
-import IconTableSort from '@/components/icons/IconTableSort'
 import { Popover } from '@/components/popovers/Popover'
 import PopoverButton from '@/components/popovers/PopoverButton'
 import PopoverContent from '@/components/popovers/PopoverContent'
 import PopoverItem from '@/components/popovers/PopoverItem'
+import Table from '@/components/tables/Table'
 import OrganisationRow from '@/components/tables/rows/OrganisationRow'
 import ButtonPluss from '@/components/ui/buttons/ButtonPluss'
 import HeaderTableCardWrapper from '@/components/wrappers/HeaderTableCardWrapper'
 
 import InputSearch from '@/ui/inputs/InputSearch'
 
+import { dashboardData } from '@/fakeData/pages/dashboard'
 import type { IOrganization } from '@/types/organization.types'
+import type { ITableColumn } from '@/types/table.types'
 
 // interface CardTableOrganisationsProps {}
 
-const theadData = [
-	{
-		name: 'Organization',
-		filtered: true
-	},
-	{
-		name: 'Owner',
-		filtered: true
-	},
-	{
-		name: 'Role',
-		filtered: true
-	},
-	{
-		name: 'Teams',
-		filtered: true
-	},
-	{
-		name: 'Users',
-		filtered: true
-	},
-	{
-		name: 'Sites',
-		filtered: true
-	},
-	{
-		name: 'Used Requests',
-		filtered: true
-	},
-	{
-		name: 'Remaining Requests',
-		filtered: true
-	},
-	{
-		name: 'Actions',
-		filtered: false
-	}
-]
-
-// const tbodyData = [
-// 	{
-// 		id: '1',
-// 		organization: {
-// 			id: '1',
-// 			name: 'Organization name',
-// 			logo: ''
-// 		},
-// 		owner: {
-// 			id: '1',
-// 			name: 'David Smith',
-// 			logo: ''
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444,
-// 		isEditable: true,
-// 		isRemovable: true
-// 	},
-// 	{
-// 		id: '2',
-// 		organization: {
-// 			id: '2',
-// 			name: 'Organization name',
-// 			logo: '/images/fakeImg/fakeOrganisation.svg'
-// 		},
-// 		owner: {
-// 			id: '2',
-// 			name: 'David Smith',
-// 			logo: '/images/fakeImg/fakeUser.png'
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444,
-// 		isEditable: false,
-// 		isRemovable: true
-// 	},
-// 	{
-// 		id: '3',
-// 		organization: {
-// 			id: '3',
-// 			name: 'Organization name',
-// 			logo: '/images/fakeImg/fakeOrganisation.svg'
-// 		},
-// 		owner: {
-// 			id: '3',
-// 			name: 'David Smith',
-// 			logo: '/images/fakeImg/fakeUser.png'
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444,
-// 		isEditable: true,
-// 		isRemovable: false
-// 	},
-
-// 	{
-// 		id: '4',
-// 		organization: {
-// 			id: '4',
-// 			name: 'Organization name',
-// 			logo: '/images/fakeImg/fakeOrganisation.svg'
-// 		},
-// 		owner: {
-// 			id: '4',
-// 			name: 'David Smith',
-// 			logo: '/images/fakeImg/fakeUser.png'
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444,
-// 		isEditable: false,
-// 		isRemovable: false
-// 	},
-// 	{
-// 		id: '5',
-// 		organization: {
-// 			id: '5',
-// 			name: 'Organization name',
-// 			logo: '/images/fakeImg/fakeOrganisation.svg'
-// 		},
-// 		owner: {
-// 			id: '5',
-// 			name: 'David Smith',
-// 			logo: '/images/fakeImg/fakeUser.png'
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444
-// 	},
-// 	{
-// 		id: '6',
-// 		organization: {
-// 			id: '6',
-// 			name: 'Organization name',
-// 			logo: '/images/fakeImg/fakeOrganisation.svg'
-// 		},
-// 		owner: {
-// 			id: '6',
-// 			name: 'David Smith',
-// 			logo: '/images/fakeImg/fakeUser.png'
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444
-// 	},
-
-// 	{
-// 		id: '7',
-// 		organization: {
-// 			id: '7',
-// 			name: 'Organization name',
-// 			logo: '/images/fakeImg/fakeOrganisation.svg'
-// 		},
-// 		owner: {
-// 			id: '7',
-// 			name: 'David Smith',
-// 			logo: '/images/fakeImg/fakeUser.png'
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444
-// 	},
-// 	{
-// 		id: '8',
-// 		organization: {
-// 			id: '8',
-// 			name: 'Organization name',
-// 			logo: '/images/fakeImg/fakeOrganisation.svg'
-// 		},
-// 		owner: {
-// 			id: '8',
-// 			name: 'David Smith',
-// 			logo: '/images/fakeImg/fakeUser.png'
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444
-// 	},
-// 	{
-// 		id: '9',
-// 		organization: {
-// 			id: '9',
-// 			name: 'Organization name',
-// 			logo: '/images/fakeImg/fakeOrganisation.svg'
-// 		},
-// 		owner: {
-// 			id: '9',
-// 			name: 'David Smith',
-// 			logo: '/images/fakeImg/fakeUser.png'
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444
-// 	},
-
-// 	{
-// 		id: '10',
-// 		organization: {
-// 			id: '10',
-// 			name: 'Organization name',
-// 			logo: '/images/fakeImg/fakeOrganisation.svg'
-// 		},
-// 		owner: {
-// 			id: '10',
-// 			name: 'David Smith',
-// 			logo: '/images/fakeImg/fakeUser.png'
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444
-// 	},
-// 	{
-// 		id: '11',
-// 		organization: {
-// 			id: '11',
-// 			name: 'Organization name',
-// 			logo: '/images/fakeImg/fakeOrganisation.svg'
-// 		},
-// 		owner: {
-// 			id: '11',
-// 			name: 'David Smith',
-// 			logo: '/images/fakeImg/fakeUser.png'
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444
-// 	},
-// 	{
-// 		id: '12',
-// 		organization: {
-// 			id: '12',
-// 			name: 'Organization name',
-// 			logo: '/images/fakeImg/fakeOrganisation.svg'
-// 		},
-// 		owner: {
-// 			id: '12',
-// 			name: 'David Smith',
-// 			logo: '/images/fakeImg/fakeUser.png'
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444
-// 	},
-
-// 	{
-// 		id: '13',
-// 		organization: {
-// 			id: '13',
-// 			name: 'Organization name',
-// 			logo: '/images/fakeImg/fakeOrganisation.svg'
-// 		},
-// 		owner: {
-// 			id: '13',
-// 			name: 'David Smith',
-// 			logo: '/images/fakeImg/fakeUser.png'
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444
-// 	},
-// 	{
-// 		id: '14',
-// 		organization: {
-// 			id: '14',
-// 			name: 'Organization name',
-// 			logo: '/images/fakeImg/fakeOrganisation.svg'
-// 		},
-// 		owner: {
-// 			id: '14',
-// 			name: 'David Smith',
-// 			logo: '/images/fakeImg/fakeUser.png'
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444
-// 	},
-// 	{
-// 		id: '15',
-// 		organization: {
-// 			id: '15',
-// 			name: 'Organization name',
-// 			logo: '/images/fakeImg/fakeOrganisation.svg'
-// 		},
-// 		owner: {
-// 			id: '15',
-// 			name: 'David Smith',
-// 			logo: '/images/fakeImg/fakeUser.png'
-// 		},
-// 		role: 'Moderator',
-// 		teamsCount: 3,
-// 		usersCount: 23,
-// 		sitesCount: 333,
-// 		usedRequest: 23,
-// 		remainingRequests: 4444
-// 	}
-// ]
-const tbodyData: IOrganization[] = [
-	{
-		id: '1',
-		name: 'Organization name',
-		logo: '/images/fakeImg/fakeOrganisation.svg',
-		owner: {
-			id: '1',
-			email: 'string@gmail.com',
-			firstName: 'David',
-			lastName: 'Smith',
-			avatar: '/images/fakeImg/fakeUser.png',
-			role: 'string',
-			paymentPlan: 'string',
-			isHold: false
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444,
-		isEditable: true,
-		isRemovable: true
-	}
-]
 const CardTableOrganisations = () => {
-	const BODY_HEIGHT = 570 // 10 рядків × 57 px
+	// Использование фейковых данных из dashboardData
+	const tableData = dashboardData.organisationsTable
+	const organizationsData: IOrganization[] = tableData.rows
+	const tableColumns: ITableColumn[] = tableData.columns
+
+	const renderOrganisationRow = (organization: IOrganization) => (
+		<OrganisationRow
+			key={organization.id}
+			organization={organization}
+			onEdit={(organizationId: string) => {
+				console.log('Edit clicked for:', organizationId)
+			}}
+			onDelete={(organizationId: string) => {
+				console.log('Delete clicked for:', organizationId)
+			}}
+		/>
+	)
 
 	return (
 		<>
@@ -428,64 +82,11 @@ const CardTableOrganisations = () => {
 				</div>
 			</HeaderTableCardWrapper>
 
-			<div className='overflow-hidden rounded-lg border border-gray-100 dark:border-green-800'>
-				<div
-					className='max-h-[616px] overflow-x-auto overflow-y-auto'
-					style={{ maxHeight: BODY_HEIGHT + 56.5 }} /* 56.5 px — висота шапки */
-				>
-					<table className='border-colapse w-full min-w-[1522px] text-left text-base leading-none'>
-						<thead className='sticky top-0 z-10 bg-gray-50 dark:bg-green-800'>
-							<tr>
-								{theadData.map((col, idx) => (
-									<th
-										key={col.name}
-										className={cn(
-											'px-4 py-5',
-											idx === 0 && 'pl-5',
-											idx === theadData.length - 1 && 'pr-5'
-										)}
-									>
-										{!col.filtered ? (
-											col.name
-										) : (
-											<button className='flex w-full items-center justify-between'>
-												{col.name}
-												<span className='flex flex-col gap-1.5'>
-													<IconTableSort
-														className='rotate-180 text-gray-300 dark:text-green-700'
-														size={4}
-													/>
-													<IconTableSort
-														size={4}
-														className='text-gray-300 dark:text-green-700'
-													/>
-												</span>
-											</button>
-										)}
-									</th>
-								))}
-							</tr>
-						</thead>
-						<tbody>
-							{tbodyData.map(organization => (
-								<OrganisationRow
-									key={organization.id}
-									organization={organization}
-									onEdit={() => {
-										console.log('Edit clicked')
-									}}
-									onDelete={() => {
-										console.log('Delete clicked')
-									}}
-								/>
-							))}
-						</tbody>
-					</table>
-				</div>
-
-				{/* footer / pagination */}
-				<div className='px-5 py-3 text-sm text-gray-300'>Showing 10 of 97</div>
-			</div>
+			<Table<IOrganization>
+				theadData={tableColumns}
+				tbodyData={organizationsData}
+				renderRow={renderOrganisationRow}
+			/>
 		</>
 	)
 }

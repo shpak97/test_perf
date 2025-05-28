@@ -32,5 +32,70 @@ export const dashboardData: IDashboard = {
 	usedRequests: {
 		total: 1000,
 		used: 450
+	},
+	organisationsTable: {
+		columns: [
+			{
+				name: 'Organization',
+				filtered: true
+			},
+			{
+				name: 'Owner',
+				filtered: true
+			},
+			{
+				name: 'Role',
+				filtered: true
+			},
+			{
+				name: 'Teams',
+				filtered: true
+			},
+			{
+				name: 'Users',
+				filtered: true
+			},
+			{
+				name: 'Sites',
+				filtered: true
+			},
+			{
+				name: 'Used Requests',
+				filtered: true
+			},
+			{
+				name: 'Remaining Requests',
+				filtered: true
+			},
+			{
+				name: 'Actions',
+				filtered: false
+			}
+		],
+		rows: [
+			{
+				id: '1',
+				name: 'Organization name',
+				logo: '/images/fakeImg/fakeOrganisation.svg',
+				owner: {
+					id: '1',
+					email: 'string@gmail.com',
+					firstName: 'David',
+					lastName: 'Smith',
+					avatar: '/images/fakeImg/fakeUser.png',
+					role: 'string',
+					paymentPlan: 'string',
+					isHold: false
+				},
+				role: 'Moderator',
+				teamsCount: 3,
+				usersCount: 23,
+				sitesCount: 333,
+				usedRequest: 23,
+				remainingRequests: 4444,
+				isEditable: true,
+				isRemovable: true
+			}
+		]
 	}
 }

@@ -1,16 +1,13 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import { memo, useCallback } from 'react'
 import { BiBuilding } from 'react-icons/bi'
-import { FiEdit3, FiTrash } from 'react-icons/fi'
 
-import LimitBadge from '@/ui/badges/LimitBadge'
+import ActionsCell from '../cells/ActionsCell'
+import BadgeCell from '../cells/BadgeCell'
+import ImageLinkCell from '../cells/ImageLinkCell'
+import LinkCell from '../cells/LinkCell'
+import TextCell from '../cells/TextCell'
 
 import type { IOrganization } from '@/types/organization.types'
-
-// Константи для розмірів
-const ICON_SIZE = 32
-const ACTION_ICON_SIZE = 20
 
 interface OrganisationRowProps {
 	organization: IOrganization
@@ -54,101 +51,56 @@ const OrganisationRow = memo<OrganisationRowProps>(function OrganisationRow({
 
 	return (
 		<tr className='group/table-row border-t border-gray-100 transition-colors last:border-b hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-700'>
-			<td className='px-4 py-3 first:pl-5 last:pr-5'>
-				<Link
-					href={`/organization/${organizationId}`}
-					className='flex items-center gap-2.5'
-				>
-					{organizationLogo ? (
-						<Image
-							src={organizationLogo}
-							alt={`${organizationName} logo`}
-							width={ICON_SIZE}
-							height={ICON_SIZE}
-							className='rounded'
-						/>
-					) : (
-						<BiBuilding
-							size={ICON_SIZE}
-							className='text-gray-400'
-							aria-label='Organization icon'
-						/>
-					)}
-					<span>{organizationName}</span>
-				</Link>
-			</td>
+			{/* Organization */}
+			<ImageLinkCell
+				href={`/organization/${organizationId}`}
+				imageSrc={organizationLogo}
+				imageAlt={`${organizationName} logo`}
+				fallbackIcon={
+					<BiBuilding
+						size={32}
+						className='text-gray-400'
+						aria-label='Organization icon'
+					/>
+				}
+				text={organizationName}
+				imageClassName='rounded'
+			/>
 
 			{/* Owner */}
-			<td className='px-4 py-3 first:pl-5 last:pr-5'>
-				<Link
-					href={`/user/${ownerId}`}
-					className='flex items-center gap-2.5'
-				>
-					<Image
-						src={avatar || '/images/icons/icon-profile-anonimus.svg'}
-						className='rounded-full'
-						alt={`${ownerName} avatar`}
-						width={ICON_SIZE}
-						height={ICON_SIZE}
-					/>
-					<span>{ownerName}</span>
-				</Link>
-			</td>
+			<ImageLinkCell
+				href={`/user/${ownerId}`}
+				imageSrc={avatar || '/images/icons/icon-profile-anonimus.svg'}
+				imageAlt={`${ownerName} avatar`}
+				text={ownerName}
+				imageClassName='rounded-full'
+			/>
 
 			{/* Role */}
-			<td className='px-4 py-3 first:pl-5 last:pr-5'>
-				<span className='capitalize'>{role}</span>
-			</td>
+			<TextCell className='capitalize'>{role}</TextCell>
 
 			{/* Teams Count */}
-			<td className='px-4 py-3 first:pl-5 last:pr-5'>
-				<Link href={`/organization/${organizationId}/teams`}>{teamsCount}</Link>
-			</td>
+			<LinkCell href={`/organization/${organizationId}/teams`}>{teamsCount}</LinkCell>
 
 			{/* Users Count */}
-			<td className='px-4 py-3 first:pl-5 last:pr-5'>
-				<span>{usersCount}</span>
-			</td>
+			<TextCell>{usersCount}</TextCell>
 
 			{/* Sites Count */}
-			<td className='px-4 py-3 first:pl-5 last:pr-5'>
-				<Link href={`/organization/${organizationId}/sites`}>{sitesCount}</Link>
-			</td>
+			<LinkCell href={`/organization/${organizationId}/sites`}>{sitesCount}</LinkCell>
 
 			{/* Used Requests */}
-			<td className='px-4 py-3 first:pl-5 last:pr-5'>
-				<LimitBadge color='orange'>{usedRequest}</LimitBadge>
-			</td>
+			<BadgeCell color='orange'>{usedRequest}</BadgeCell>
 
 			{/* Remaining Requests */}
-			<td className='px-4 py-3 first:pl-5 last:pr-5'>
-				<LimitBadge>{remainingRequests}</LimitBadge>
-			</td>
+			<BadgeCell>{remainingRequests}</BadgeCell>
 
 			{/* Actions */}
-			<td className='px-4 py-3 first:pl-5 last:pr-5'>
-				<div className='invisible flex gap-x-2.5 opacity-0 transition-opacity group-hover/table-row:visible group-hover/table-row:opacity-100'>
-					{onEdit && (
-						<button
-							onClick={handleEdit}
-							aria-label={`Edit ${organizationName}`}
-							title='Edit organization'
-						>
-							<FiEdit3 size={ACTION_ICON_SIZE} />
-						</button>
-					)}
-					{onDelete && (
-						<button
-							onClick={handleDelete}
-							className='text-red-500'
-							aria-label={`Delete ${organizationName}`}
-							title='Delete organization'
-						>
-							<FiTrash size={ACTION_ICON_SIZE} />
-						</button>
-					)}
-				</div>
-			</td>
+			<ActionsCell
+				onEdit={onEdit ? handleEdit : undefined}
+				onDelete={onDelete ? handleDelete : undefined}
+				editLabel={`Edit ${organizationName}`}
+				deleteLabel={`Delete ${organizationName}`}
+			/>
 		</tr>
 	)
 })
