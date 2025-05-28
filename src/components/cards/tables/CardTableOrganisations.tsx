@@ -1,10 +1,8 @@
 'use client'
 
 import cn from 'clsx'
-import Image from 'next/image'
-import Link from 'next/link'
 import { BiBuilding } from 'react-icons/bi'
-import { FiEdit3, FiLogOut, FiTrash } from 'react-icons/fi'
+import { FiLogOut } from 'react-icons/fi'
 import { HiOutlineDotsVertical } from 'react-icons/hi'
 import { LuFilter } from 'react-icons/lu'
 
@@ -14,11 +12,13 @@ import { Popover } from '@/components/popovers/Popover'
 import PopoverButton from '@/components/popovers/PopoverButton'
 import PopoverContent from '@/components/popovers/PopoverContent'
 import PopoverItem from '@/components/popovers/PopoverItem'
+import OrganisationRow from '@/components/tables/rows/OrganisationRow'
 import ButtonPluss from '@/components/ui/buttons/ButtonPluss'
 import HeaderTableCardWrapper from '@/components/wrappers/HeaderTableCardWrapper'
 
-import LimitBadge from '@/ui/badges/LimitBadge'
 import InputSearch from '@/ui/inputs/InputSearch'
+
+import type { IOrganization } from '@/types/organization.types'
 
 // interface CardTableOrganisationsProps {}
 
@@ -61,18 +61,319 @@ const theadData = [
 	}
 ]
 
-const tbodyData = [
+// const tbodyData = [
+// 	{
+// 		id: '1',
+// 		organization: {
+// 			id: '1',
+// 			name: 'Organization name',
+// 			logo: ''
+// 		},
+// 		owner: {
+// 			id: '1',
+// 			name: 'David Smith',
+// 			logo: ''
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444,
+// 		isEditable: true,
+// 		isRemovable: true
+// 	},
+// 	{
+// 		id: '2',
+// 		organization: {
+// 			id: '2',
+// 			name: 'Organization name',
+// 			logo: '/images/fakeImg/fakeOrganisation.svg'
+// 		},
+// 		owner: {
+// 			id: '2',
+// 			name: 'David Smith',
+// 			logo: '/images/fakeImg/fakeUser.png'
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444,
+// 		isEditable: false,
+// 		isRemovable: true
+// 	},
+// 	{
+// 		id: '3',
+// 		organization: {
+// 			id: '3',
+// 			name: 'Organization name',
+// 			logo: '/images/fakeImg/fakeOrganisation.svg'
+// 		},
+// 		owner: {
+// 			id: '3',
+// 			name: 'David Smith',
+// 			logo: '/images/fakeImg/fakeUser.png'
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444,
+// 		isEditable: true,
+// 		isRemovable: false
+// 	},
+
+// 	{
+// 		id: '4',
+// 		organization: {
+// 			id: '4',
+// 			name: 'Organization name',
+// 			logo: '/images/fakeImg/fakeOrganisation.svg'
+// 		},
+// 		owner: {
+// 			id: '4',
+// 			name: 'David Smith',
+// 			logo: '/images/fakeImg/fakeUser.png'
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444,
+// 		isEditable: false,
+// 		isRemovable: false
+// 	},
+// 	{
+// 		id: '5',
+// 		organization: {
+// 			id: '5',
+// 			name: 'Organization name',
+// 			logo: '/images/fakeImg/fakeOrganisation.svg'
+// 		},
+// 		owner: {
+// 			id: '5',
+// 			name: 'David Smith',
+// 			logo: '/images/fakeImg/fakeUser.png'
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444
+// 	},
+// 	{
+// 		id: '6',
+// 		organization: {
+// 			id: '6',
+// 			name: 'Organization name',
+// 			logo: '/images/fakeImg/fakeOrganisation.svg'
+// 		},
+// 		owner: {
+// 			id: '6',
+// 			name: 'David Smith',
+// 			logo: '/images/fakeImg/fakeUser.png'
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444
+// 	},
+
+// 	{
+// 		id: '7',
+// 		organization: {
+// 			id: '7',
+// 			name: 'Organization name',
+// 			logo: '/images/fakeImg/fakeOrganisation.svg'
+// 		},
+// 		owner: {
+// 			id: '7',
+// 			name: 'David Smith',
+// 			logo: '/images/fakeImg/fakeUser.png'
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444
+// 	},
+// 	{
+// 		id: '8',
+// 		organization: {
+// 			id: '8',
+// 			name: 'Organization name',
+// 			logo: '/images/fakeImg/fakeOrganisation.svg'
+// 		},
+// 		owner: {
+// 			id: '8',
+// 			name: 'David Smith',
+// 			logo: '/images/fakeImg/fakeUser.png'
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444
+// 	},
+// 	{
+// 		id: '9',
+// 		organization: {
+// 			id: '9',
+// 			name: 'Organization name',
+// 			logo: '/images/fakeImg/fakeOrganisation.svg'
+// 		},
+// 		owner: {
+// 			id: '9',
+// 			name: 'David Smith',
+// 			logo: '/images/fakeImg/fakeUser.png'
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444
+// 	},
+
+// 	{
+// 		id: '10',
+// 		organization: {
+// 			id: '10',
+// 			name: 'Organization name',
+// 			logo: '/images/fakeImg/fakeOrganisation.svg'
+// 		},
+// 		owner: {
+// 			id: '10',
+// 			name: 'David Smith',
+// 			logo: '/images/fakeImg/fakeUser.png'
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444
+// 	},
+// 	{
+// 		id: '11',
+// 		organization: {
+// 			id: '11',
+// 			name: 'Organization name',
+// 			logo: '/images/fakeImg/fakeOrganisation.svg'
+// 		},
+// 		owner: {
+// 			id: '11',
+// 			name: 'David Smith',
+// 			logo: '/images/fakeImg/fakeUser.png'
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444
+// 	},
+// 	{
+// 		id: '12',
+// 		organization: {
+// 			id: '12',
+// 			name: 'Organization name',
+// 			logo: '/images/fakeImg/fakeOrganisation.svg'
+// 		},
+// 		owner: {
+// 			id: '12',
+// 			name: 'David Smith',
+// 			logo: '/images/fakeImg/fakeUser.png'
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444
+// 	},
+
+// 	{
+// 		id: '13',
+// 		organization: {
+// 			id: '13',
+// 			name: 'Organization name',
+// 			logo: '/images/fakeImg/fakeOrganisation.svg'
+// 		},
+// 		owner: {
+// 			id: '13',
+// 			name: 'David Smith',
+// 			logo: '/images/fakeImg/fakeUser.png'
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444
+// 	},
+// 	{
+// 		id: '14',
+// 		organization: {
+// 			id: '14',
+// 			name: 'Organization name',
+// 			logo: '/images/fakeImg/fakeOrganisation.svg'
+// 		},
+// 		owner: {
+// 			id: '14',
+// 			name: 'David Smith',
+// 			logo: '/images/fakeImg/fakeUser.png'
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444
+// 	},
+// 	{
+// 		id: '15',
+// 		organization: {
+// 			id: '15',
+// 			name: 'Organization name',
+// 			logo: '/images/fakeImg/fakeOrganisation.svg'
+// 		},
+// 		owner: {
+// 			id: '15',
+// 			name: 'David Smith',
+// 			logo: '/images/fakeImg/fakeUser.png'
+// 		},
+// 		role: 'Moderator',
+// 		teamsCount: 3,
+// 		usersCount: 23,
+// 		sitesCount: 333,
+// 		usedRequest: 23,
+// 		remainingRequests: 4444
+// 	}
+// ]
+const tbodyData: IOrganization[] = [
 	{
 		id: '1',
-		organization: {
-			id: '1',
-			name: 'Organization name',
-			logo: ''
-		},
+		name: 'Organization name',
+		logo: '/images/fakeImg/fakeOrganisation.svg',
 		owner: {
 			id: '1',
-			name: 'David Smith',
-			logo: ''
+			email: 'string@gmail.com',
+			firstName: 'David',
+			lastName: 'Smith',
+			avatar: '/images/fakeImg/fakeUser.png',
+			role: 'string',
+			paymentPlan: 'string',
+			isHold: false
 		},
 		role: 'Moderator',
 		teamsCount: 3,
@@ -82,285 +383,8 @@ const tbodyData = [
 		remainingRequests: 4444,
 		isEditable: true,
 		isRemovable: true
-	},
-	{
-		id: '2',
-		organization: {
-			id: '2',
-			name: 'Organization name',
-			logo: '/images/fakeImg/fakeOrganisation.svg'
-		},
-		owner: {
-			id: '2',
-			name: 'David Smith',
-			logo: '/images/fakeImg/fakeUser.png'
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444,
-		isEditable: false,
-		isRemovable: true
-	},
-	{
-		id: '3',
-		organization: {
-			id: '3',
-			name: 'Organization name',
-			logo: '/images/fakeImg/fakeOrganisation.svg'
-		},
-		owner: {
-			id: '3',
-			name: 'David Smith',
-			logo: '/images/fakeImg/fakeUser.png'
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444,
-		isEditable: true,
-		isRemovable: false
-	},
-
-	{
-		id: '4',
-		organization: {
-			id: '4',
-			name: 'Organization name',
-			logo: '/images/fakeImg/fakeOrganisation.svg'
-		},
-		owner: {
-			id: '4',
-			name: 'David Smith',
-			logo: '/images/fakeImg/fakeUser.png'
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444,
-		isEditable: false,
-		isRemovable: false
-	},
-	{
-		id: '5',
-		organization: {
-			id: '5',
-			name: 'Organization name',
-			logo: '/images/fakeImg/fakeOrganisation.svg'
-		},
-		owner: {
-			id: '5',
-			name: 'David Smith',
-			logo: '/images/fakeImg/fakeUser.png'
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444
-	},
-	{
-		id: '6',
-		organization: {
-			id: '6',
-			name: 'Organization name',
-			logo: '/images/fakeImg/fakeOrganisation.svg'
-		},
-		owner: {
-			id: '6',
-			name: 'David Smith',
-			logo: '/images/fakeImg/fakeUser.png'
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444
-	},
-
-	{
-		id: '7',
-		organization: {
-			id: '7',
-			name: 'Organization name',
-			logo: '/images/fakeImg/fakeOrganisation.svg'
-		},
-		owner: {
-			id: '7',
-			name: 'David Smith',
-			logo: '/images/fakeImg/fakeUser.png'
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444
-	},
-	{
-		id: '8',
-		organization: {
-			id: '8',
-			name: 'Organization name',
-			logo: '/images/fakeImg/fakeOrganisation.svg'
-		},
-		owner: {
-			id: '8',
-			name: 'David Smith',
-			logo: '/images/fakeImg/fakeUser.png'
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444
-	},
-	{
-		id: '9',
-		organization: {
-			id: '9',
-			name: 'Organization name',
-			logo: '/images/fakeImg/fakeOrganisation.svg'
-		},
-		owner: {
-			id: '9',
-			name: 'David Smith',
-			logo: '/images/fakeImg/fakeUser.png'
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444
-	},
-
-	{
-		id: '10',
-		organization: {
-			id: '10',
-			name: 'Organization name',
-			logo: '/images/fakeImg/fakeOrganisation.svg'
-		},
-		owner: {
-			id: '10',
-			name: 'David Smith',
-			logo: '/images/fakeImg/fakeUser.png'
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444
-	},
-	{
-		id: '11',
-		organization: {
-			id: '11',
-			name: 'Organization name',
-			logo: '/images/fakeImg/fakeOrganisation.svg'
-		},
-		owner: {
-			id: '11',
-			name: 'David Smith',
-			logo: '/images/fakeImg/fakeUser.png'
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444
-	},
-	{
-		id: '12',
-		organization: {
-			id: '12',
-			name: 'Organization name',
-			logo: '/images/fakeImg/fakeOrganisation.svg'
-		},
-		owner: {
-			id: '12',
-			name: 'David Smith',
-			logo: '/images/fakeImg/fakeUser.png'
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444
-	},
-
-	{
-		id: '13',
-		organization: {
-			id: '13',
-			name: 'Organization name',
-			logo: '/images/fakeImg/fakeOrganisation.svg'
-		},
-		owner: {
-			id: '13',
-			name: 'David Smith',
-			logo: '/images/fakeImg/fakeUser.png'
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444
-	},
-	{
-		id: '14',
-		organization: {
-			id: '14',
-			name: 'Organization name',
-			logo: '/images/fakeImg/fakeOrganisation.svg'
-		},
-		owner: {
-			id: '14',
-			name: 'David Smith',
-			logo: '/images/fakeImg/fakeUser.png'
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444
-	},
-	{
-		id: '15',
-		organization: {
-			id: '15',
-			name: 'Organization name',
-			logo: '/images/fakeImg/fakeOrganisation.svg'
-		},
-		owner: {
-			id: '15',
-			name: 'David Smith',
-			logo: '/images/fakeImg/fakeUser.png'
-		},
-		role: 'Moderator',
-		teamsCount: 3,
-		usersCount: 23,
-		sitesCount: 333,
-		usedRequest: 23,
-		remainingRequests: 4444
 	}
 ]
-
 const CardTableOrganisations = () => {
 	const BODY_HEIGHT = 570 // 10 рядків × 57 px
 
@@ -443,83 +467,24 @@ const CardTableOrganisations = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{tbodyData.map(row => (
-								<tr
-									key={row.id}
-									className='group/table-row border-t border-gray-100 transition-colors last:border-b hover:bg-green-50 dark:border-green-800 dark:hover:bg-green-700'
-								>
-									<td className='px-4 py-3 first:pl-5 last:pr-5'>
-										<Link
-											href={`/organization/${row.organization.id}`}
-											className='flex items-center gap-2.5'
-										>
-											{row.organization.logo ? (
-												<Image
-													src={row.organization.logo}
-													alt={`${row.organization.name} logo`}
-													width={32}
-													height={32}
-												/>
-											) : (
-												<BiBuilding size={32} />
-											)}
-											{row.organization.name}
-										</Link>
-									</td>
-									<td className='px-4 py-3 first:pl-5 last:pr-5'>
-										<Link
-											href={`/user/${row.owner.id}`}
-											className='flex items-center gap-2.5'
-										>
-											<Image
-												src={row.owner.logo || '/images/icons/icon-profile-anonimus.svg'}
-												className='rounded-full'
-												alt={`${row.owner.name} avatar`}
-												width={32}
-												height={32}
-											/>
-											{row.owner.name}
-										</Link>
-									</td>
-									<td className='px-4 py-3 first:pl-5 last:pr-5'>{row.role}</td>
-									<td className='px-4 py-3 first:pl-5 last:pr-5'>
-										<Link href={`/organization/${row.organization.id}/teams`}>
-											{row.teamsCount}
-										</Link>
-									</td>
-									<td className='px-4 py-3 first:pl-5 last:pr-5'>{row.usersCount}</td>
-									<td className='px-4 py-3 first:pl-5 last:pr-5'>
-										<Link href={`/organization/${row.organization.id}/sites`}>
-											{row.sitesCount}
-										</Link>
-									</td>
-									<td className='px-4 py-3 first:pl-5 last:pr-5'>
-										<LimitBadge color='orange'>{row.usedRequest}</LimitBadge>
-									</td>
-									<td className='px-4 py-3 first:pl-5 last:pr-5'>
-										<LimitBadge>{row.remainingRequests}</LimitBadge>
-									</td>
-									<td className='px-4 py-3 first:pl-5 last:pr-5'>
-										<span className='invisible flex gap-x-2.5 opacity-0 transition-opacity group-hover/table-row:visible group-hover/table-row:opacity-100'>
-											<button>
-												<FiEdit3 size={20} />
-											</button>
-											<button>
-												<FiTrash
-													size={20}
-													className='text-red-500'
-												/>
-											</button>
-										</span>
-									</td>
-								</tr>
+							{tbodyData.map(organization => (
+								<OrganisationRow
+									key={organization.id}
+									organization={organization}
+									onEdit={() => {
+										console.log('Edit clicked')
+									}}
+									onDelete={() => {
+										console.log('Delete clicked')
+									}}
+								/>
 							))}
 						</tbody>
 					</table>
 				</div>
 
 				{/* footer / pagination */}
-				<div className='px-5 py-3 text-sm text-gray-500'>Showing 10 of 97</div>
+				<div className='px-5 py-3 text-sm text-gray-300'>Showing 10 of 97</div>
 			</div>
 		</>
 	)
