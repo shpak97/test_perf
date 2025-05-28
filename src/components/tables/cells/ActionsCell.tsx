@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { FiEdit3, FiTrash } from 'react-icons/fi'
 
 const ACTION_ICON_SIZE = 20
@@ -9,7 +10,12 @@ interface IActionsCellProps {
 	deleteLabel?: string
 }
 
-const ActionsCell = ({ onEdit, onDelete, editLabel, deleteLabel }: IActionsCellProps) => {
+const ActionsCell = memo(function ActionsCell({
+	onEdit,
+	onDelete,
+	editLabel,
+	deleteLabel
+}: IActionsCellProps) {
 	return (
 		<td className='px-4 py-3 first:pl-5 last:pr-5'>
 			<div className='invisible flex gap-x-2.5 opacity-0 transition-opacity group-hover/table-row:visible group-hover/table-row:opacity-100'>
@@ -35,6 +41,6 @@ const ActionsCell = ({ onEdit, onDelete, editLabel, deleteLabel }: IActionsCellP
 			</div>
 		</td>
 	)
-}
+})
 
 export default ActionsCell

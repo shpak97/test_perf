@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import { memo } from 'react'
 
 const ICON_SIZE = 32
 
@@ -14,7 +15,7 @@ interface IImageLinkCellProps {
 	linkClassName?: string
 }
 
-const ImageLinkCell = ({
+const ImageLinkCell = memo(function ImageLinkCell({
 	href,
 	imageSrc,
 	imageAlt,
@@ -22,7 +23,7 @@ const ImageLinkCell = ({
 	text,
 	imageClassName = '',
 	linkClassName = 'flex items-center gap-2.5'
-}: IImageLinkCellProps) => {
+}: IImageLinkCellProps) {
 	return (
 		<td className='px-4 py-3 first:pl-5 last:pr-5'>
 			<Link
@@ -44,6 +45,6 @@ const ImageLinkCell = ({
 			</Link>
 		</td>
 	)
-}
+})
 
 export default ImageLinkCell

@@ -1,11 +1,7 @@
 import { memo, useCallback } from 'react'
 import { BiBuilding } from 'react-icons/bi'
 
-import ActionsCell from '../cells/ActionsCell'
-import BadgeCell from '../cells/BadgeCell'
-import ImageLinkCell from '../cells/ImageLinkCell'
-import LinkCell from '../cells/LinkCell'
-import TextCell from '../cells/TextCell'
+import { ActionsCell, BadgeCell, ImageLinkCell, LinkCell, TextCell } from '../cells'
 
 import type { IOrganization } from '@/types/organization.types'
 

@@ -1,4 +1,5 @@
 import cn from 'clsx'
+import { memo } from 'react'
 
 import IconTableSort from '../../icons/IconTableSort'
 
@@ -10,7 +11,7 @@ interface ITheadCellProps {
 	totalColumns: number
 }
 
-const TheadCell = ({ col, idx, totalColumns }: ITheadCellProps) => {
+const TheadCell = memo(function TheadCell({ col, idx, totalColumns }: ITheadCellProps) {
 	return (
 		<th
 			key={col.name}
@@ -35,6 +36,6 @@ const TheadCell = ({ col, idx, totalColumns }: ITheadCellProps) => {
 			)}
 		</th>
 	)
-}
+})
 
 export default TheadCell

@@ -1,4 +1,6 @@
-import TheadCell from '../cells/TheadCell'
+import { memo } from 'react'
+
+import { TheadCell } from '../cells'
 
 import type { ITableColumn } from '@/types/table.types'
 
@@ -6,7 +8,7 @@ interface ITheadRowProps {
 	theadData: ITableColumn[]
 }
 
-const TheadRow = ({ theadData }: ITheadRowProps) => {
+const TheadRow = memo(function TheadRow({ theadData }: ITheadRowProps) {
 	return (
 		<tr>
 			{theadData.map((col, idx) => (
@@ -19,6 +21,6 @@ const TheadRow = ({ theadData }: ITheadRowProps) => {
 			))}
 		</tr>
 	)
-}
+})
 
 export default TheadRow

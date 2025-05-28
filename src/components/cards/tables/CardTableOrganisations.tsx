@@ -10,8 +10,7 @@ import { Popover } from '@/components/popovers/Popover'
 import PopoverButton from '@/components/popovers/PopoverButton'
 import PopoverContent from '@/components/popovers/PopoverContent'
 import PopoverItem from '@/components/popovers/PopoverItem'
-import Table from '@/components/tables/Table'
-import OrganisationRow from '@/components/tables/rows/OrganisationRow'
+import { OrganisationRow, Table } from '@/components/tables'
 import ButtonPluss from '@/components/ui/buttons/ButtonPluss'
 import HeaderTableCardWrapper from '@/components/wrappers/HeaderTableCardWrapper'
 
@@ -49,7 +48,7 @@ const CardTableOrganisations = () => {
 					title='Organisations'
 					Icon={BiBuilding}
 				/>
-				<div className='flex flex-1 items-center gap-7.5'>
+				<div className='gap-7.5 flex flex-1 items-center'>
 					<form
 						action='search'
 						className='w-[540px]'
@@ -66,7 +65,7 @@ const CardTableOrganisations = () => {
 				<div className='flex items-center gap-2.5'>
 					<ButtonPluss onClick={() => {}}>Add new organization</ButtonPluss>
 					<Popover>
-						<PopoverButton className='flex h-10.5 items-center gap-2'>
+						<PopoverButton className='h-10.5 flex items-center gap-2'>
 							<HiOutlineDotsVertical size={20} />
 						</PopoverButton>
 

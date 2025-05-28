@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import { memo } from 'react'
 
 interface ILinkCellProps {
 	href: string
@@ -7,7 +8,7 @@ interface ILinkCellProps {
 	className?: string
 }
 
-const LinkCell = ({ href, children, className }: ILinkCellProps) => {
+const LinkCell = memo(function LinkCell({ href, children, className }: ILinkCellProps) {
 	return (
 		<td className='px-4 py-3 first:pl-5 last:pr-5'>
 			<Link
@@ -18,6 +19,6 @@ const LinkCell = ({ href, children, className }: ILinkCellProps) => {
 			</Link>
 		</td>
 	)
-}
+})
 
 export default LinkCell
