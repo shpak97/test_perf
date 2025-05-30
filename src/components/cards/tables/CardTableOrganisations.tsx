@@ -1,5 +1,6 @@
 'use client'
 
+import { useCallback, useMemo, useState } from 'react'
 import { BiBuilding } from 'react-icons/bi'
 import { FiLogOut } from 'react-icons/fi'
 import { HiOutlineDotsVertical } from 'react-icons/hi'
@@ -10,11 +11,10 @@ import { Popover } from '@/components/popovers/Popover'
 import PopoverButton from '@/components/popovers/PopoverButton'
 import PopoverContent from '@/components/popovers/PopoverContent'
 import PopoverItem from '@/components/popovers/PopoverItem'
+import { SearchFilter } from '@/components/search'
 import { OrganisationRow, Table } from '@/components/tables'
 import ButtonPluss from '@/components/ui/buttons/ButtonPluss'
 import HeaderTableCardWrapper from '@/components/wrappers/HeaderTableCardWrapper'
-
-import InputSearch from '@/ui/inputs/InputSearch'
 
 import { dashboardData } from '@/fakeData/pages/dashboard'
 import type { IOrganization } from '@/types/organization.types'
@@ -23,10 +23,43 @@ import type { ITableColumn } from '@/types/table.types'
 // interface CardTableOrganisationsProps {}
 
 const CardTableOrganisations = () => {
-	// Использование фейковых данных из dashboardData
+	// Використання фейкових даних з dashboardData
 	const tableData = dashboardData.organisationsTable
 	const organizationsData: IOrganization[] = tableData.rows
 	const tableColumns: ITableColumn[] = tableData.columns
+
+	// Стан для відфільтрованих даних та метрик
+	const [filteredData, setFilteredData] = useState<IOrganization[]>(organizationsData)
+	const [searchMetrics, setSearchMetrics] = useState({
+		resultCount: organizationsData.length,
+		totalCount: organizationsData.length,
+		isSearching: false
+	})
+
+	// Мемоізуємо поля пошуку щоб уникнути ререндеру
+	const searchFields = useMemo(
+		() => [
+			'name', // назва організації
+			'owner.firstName', // ім'я власника
+			'owner.lastName', // прізвище власника
+			'owner.email', // email власника
+			'role' // роль
+		],
+		[]
+	)
+
+	// Обробка відфільтрованих даних
+	const handleFilteredData = useCallback((data: IOrganization[]) => {
+		setFilteredData(data)
+	}, [])
+
+	// Обробка метрик пошуку
+	const handleMetricsChange = useCallback(
+		(metrics: { resultCount: number; totalCount: number; isSearching: boolean }) => {
+			setSearchMetrics(metrics)
+		},
+		[]
+	)
 
 	const renderOrganisationRow = (organization: IOrganization) => (
 		<OrganisationRow
@@ -48,13 +81,16 @@ const CardTableOrganisations = () => {
 					title='Organisations'
 					Icon={BiBuilding}
 				/>
-				<div className='gap-7.5 flex flex-1 items-center'>
-					<form
-						action='search'
+				<div className='flex flex-1 items-center gap-7.5'>
+					<SearchFilter<IOrganization>
+						data={organizationsData}
+						searchFields={searchFields}
+						onFilteredData={handleFilteredData}
+						onMetricsChange={handleMetricsChange}
+						placeholder='Search by organization name'
 						className='w-[540px]'
-					>
-						<InputSearch />
-					</form>
+						minSearchLength={1}
+					/>
 					<button onClick={() => {}}>
 						<ContentTitle
 							title='Filter'
@@ -65,7 +101,7 @@ const CardTableOrganisations = () => {
 				<div className='flex items-center gap-2.5'>
 					<ButtonPluss onClick={() => {}}>Add new organization</ButtonPluss>
 					<Popover>
-						<PopoverButton className='h-10.5 flex items-center gap-2'>
+						<PopoverButton className='flex h-10.5 items-center gap-2'>
 							<HiOutlineDotsVertical size={20} />
 						</PopoverButton>
 
@@ -83,8 +119,9 @@ const CardTableOrganisations = () => {
 
 			<Table<IOrganization>
 				theadData={tableColumns}
-				tbodyData={organizationsData}
+				tbodyData={filteredData}
 				renderRow={renderOrganisationRow}
+				searchMetrics={searchMetrics}
 			/>
 		</>
 	)

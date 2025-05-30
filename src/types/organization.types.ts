@@ -13,4 +13,5 @@ export interface IOrganization {
 	remainingRequests: number
 	isEditable: boolean
 	isRemovable: boolean
+	[key: string]: unknown
 }
